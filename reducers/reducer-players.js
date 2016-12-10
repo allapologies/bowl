@@ -2,13 +2,13 @@ import * as actions from '../actions/constants'
 import _ from 'lodash'
 
 const INITIAL_STATE = {
-    items: []
+    players: []
 }
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case actions.FETCH_DICTIONARIES:
-            return _.assign({}, state, { items: action.payload.data })
+        case actions.GAME_ADD_PLAYER:
+            return _.assign({}, state, { players: state.players.push(action.payload) })
         default:
             return state
     }

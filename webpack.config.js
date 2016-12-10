@@ -24,6 +24,10 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
+    },
+    devServer: {
+        inline: true,
+        hot: true
     }
 }
 
