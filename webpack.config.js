@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
     entry  : {
-        app: ['./src/index.js']
+        app: ['./index.jsx']
     },
     output : {
         path      : path.resolve(__dirname, 'build'),
