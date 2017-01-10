@@ -1,8 +1,10 @@
 /* eslint-env jasmine */
 import players from '../reducers/reducer-players'
 import frames from '../reducers/reducer-frames'
+import steps from '../reducers/reducer-steps'
+
 import {
-    GAME_ADD_PLAYER, GAME_REMOVE_PLAYER, GAME_INIT, GAME_START_FRAME, GAME_BALL_REACHED
+    GAME_ADD_PLAYER, GAME_REMOVE_PLAYER, GAME_INIT, GAME_START_FRAME, GAME_BALL_REACHED, GAME_SET_STEP
 } from '../actions/constants'
 
 describe('Reducers', () => {
@@ -139,5 +141,42 @@ describe('Reducers', () => {
             expect(actual).toEqual(expected)
         })
 
+    })
+    describe('Steps', () => {
+        it('should return the initial state', () => {
+            const expected = {
+                step: 1
+            }
+            const actual = steps(undefined, {})
+            expect(actual).toEqual(expected)
+        })
+        it('should handle GAME_SET_STEP with empty initial state', () => {
+            const expected = {
+                step: 1
+            }
+
+            const action = {
+                type: GAME_SET_STEP, step: 1
+            }
+
+            const actual = steps(undefined, action)
+            expect(actual).toEqual(expected)
+        })
+        it('should handle GAME_SET_STEP not empty initial state', () => {
+            const initialState = {
+                step: 1
+            }
+
+            const expected = {
+                step: 2
+            }
+
+            const action = {
+                type: GAME_SET_STEP, step: 2
+            }
+
+            const actual = steps(initialState, action)
+            expect(actual).toEqual(expected)
+        })
     })
 })
