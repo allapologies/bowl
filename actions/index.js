@@ -21,8 +21,10 @@ export function initGame () {
     }
 }
 
-export function throwABall () {
+export function throwBall (player) {
     return {
-        type: actions.GAME_THROW_BALL
+        type: actions.GAME_THROW_BALL,
+        player,
+        withRandomPoints: true
     }
 }
