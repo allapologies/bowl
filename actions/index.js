@@ -21,10 +21,11 @@ export function initGame () {
     }
 }
 
-export function throwBall (player) {
-    return {
-        type: actions.GAME_THROW_BALL,
-        player,
-        withRandomPoints: true
-    }
-}
+export const startGame = () => ({ type: actions.START_NEW_GAME })
+
+export const replayGame = () => ({ type: actions.REPLAY_GAME })
+
+export const throwBall = () => ({
+    type: actions.GAME_THROW_BALL,
+    withRandomPoints: true
+})

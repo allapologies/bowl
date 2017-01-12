@@ -15,7 +15,6 @@ export class App extends React.Component {
         const { step } = this.props
         return (
           <div className="container">
-              <h5>Bowling</h5>
               { step === 1 && <Players /> }
               { step === 2 && <Game /> }
               { step === 3 && <Results /> }

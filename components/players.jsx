@@ -7,12 +7,14 @@ import * as actions from '../actions'
     players: state.players.players,
 }), (dispatch) => ({
     addPlayer: (name) => dispatch(actions.addPlayer(name)),
-    removePlayer: (id) => dispatch(actions.removePlayer(id))
+    removePlayer: (id) => dispatch(actions.removePlayer(id)),
+    startGame: () => dispatch(actions.startGame())
 }))
 export class Players extends React.Component {
     static propTypes = {
         addPlayer: React.PropTypes.func,
         removePlayer: React.PropTypes.func,
+        startGame: React.PropTypes.func,
         players: React.PropTypes.array
     }
 
@@ -23,7 +25,10 @@ export class Players extends React.Component {
         }
     }
 
-    handleInput = (event) => this.setState({ name: event.target.value })
+    handleInput = (event) => this.setState({
+        name: event.target.value
+    })
+
     handleSubmit = (event) => {
         event.preventDefault()
         const { name } = this.state
@@ -31,12 +36,22 @@ export class Players extends React.Component {
             return
         }
         this.props.addPlayer(this.state.name)
-        this.setState({ name: '' })
+        this.setState({
+            name: ''
+        })
     }
 
     handleRemove = (event, id) => {
         event.preventDefault()
         this.props.removePlayer(id)
+    }
+
+    handleStartClick = () => {
+        if (this.props.players.length < 0) {
+            return
+        }
+
+        this.props.startGame()
     }
 
     renderPlayers = () => {
@@ -50,7 +65,9 @@ export class Players extends React.Component {
                   return (
                     <li key={index}>
                         {player.name}
-                        <button type="button" onClick={(event) => this.handleRemove(event, player.id)}>remove</button>
+                        <button type="button" onClick={(event) => this.handleRemove(event, player.id)}>
+                            remove
+                        </button>
                     </li>
                   )
               })}
@@ -62,10 +79,15 @@ export class Players extends React.Component {
         return (
           <div>
               <form onSubmit={this.handleSubmit}>
-                  <input value={this.state.name} onChange={this.handleInput} placeholder="player name"/>
-                  <button type="submit">Add player</button>
+                  <input
+                    value={this.state.name}
+                    onChange={this.handleInput}
+                    placeholder="player name"
+                  />
+                  <button type="submit">add player</button>
               </form>
               {this.renderPlayers()}
+              <button type="button" onClick={this.handleStartClick}>start!</button>
           </div>
         )
     }
