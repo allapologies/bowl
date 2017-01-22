@@ -1,22 +1,22 @@
-import { getRandomInt, getNext } from '../utility/helpers'
+import { getRandomInt, getNext, getMax } from '../utility/helpers'
 import * as actions from '../actions/constants'
 
 export default store => next => action => {
     if (!action.withRandomPoints) {
         return next(action)
     }
+    next(action)
 
     const state = store.getState()
     const { frames, players } = state
-    const { currentFrame, currentRoll } = frames
+    const { currentFrame, currentRoll, rolls } = frames
     const { currentPlayer } = players
 
-    const max = 10
+    const max = getMax(rolls, currentPlayer, currentFrame)
     const score = getRandomInt(0, max)
 
     const nextState = getNext(state, score)
 
-    next(action)
     return next({
         type: actions.GAME_THROW_BALL_SUCCESS,
         score,

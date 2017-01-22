@@ -2,6 +2,23 @@ import _ from 'lodash'
 
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
+export const getMax = (scoreData = [], playerId, frameId) => {
+    let max = 10
+
+    _.forEach(scoreData, (record) => {
+        if (record.playerId === playerId) {
+            if (record.frameId === frameId) {
+                if (record.score !== null) {
+                    max -= record.score
+                }
+            }
+        }
+
+    })
+
+    return max
+}
+
 export const getNextPlayerId = (currentPlayerId, players) => {
     const currentIndex = _.findIndex(players, (player) => player.id === currentPlayerId)
     if (players[currentIndex + 1]) {
