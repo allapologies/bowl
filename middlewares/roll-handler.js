@@ -16,6 +16,7 @@ export default store => next => action => {
 
     const nextState = getNext(state, score)
 
+    next(action)
     return next({
         type: actions.GAME_THROW_BALL_SUCCESS,
         score,

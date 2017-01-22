@@ -4,7 +4,11 @@ export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min 
 
 export const getNextPlayerId = (currentPlayerId, players) => {
     const currentIndex = _.findIndex(players, (player) => player.id === currentPlayerId)
-    return players.length === currentIndex ? players[0].id : players[currentIndex + 1].id
+    if (players[currentIndex + 1]) {
+        return players[currentIndex + 1].id
+    } else {
+        return players[0].id
+    }
 }
 
 export const getNextFrameId = (state) => state.frames.currentFrame + 1
