@@ -1,10 +1,13 @@
+import _ from 'lodash'
 import * as actions from './constants'
 
 export function addPlayer (name) {
-    return {
-        type: actions.GAME_ADD_PLAYER,
-        name,
-        withCustomId: true
+    return function (dispatch) {
+        dispatch({
+            type: actions.GAME_ADD_PLAYER,
+            name,
+            id: _.uniqueId()
+        })
     }
 }
 
