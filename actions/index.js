@@ -49,3 +49,21 @@ export const throwBall = () => (dispatch, getState) => {
         ...nextState
     })
 }
+
+export const resumeGame = (players, step = 2) => {
+    return (dispatch) => {
+        _.forEach(players, (player) => {
+            dispatch(addPlayer(player, step))
+        })
+
+        dispatch({
+            type: actions.GAME_NEXT_PLAYER,
+            player: '1'
+        })
+
+        dispatch({
+            type: actions.GAME_SET_STEP,
+            step
+        })
+    }
+}

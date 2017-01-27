@@ -3,6 +3,7 @@ export const REPLAY_GAME = 'REPLAY_GAME'
 export const GAME_FINISH = 'GAME_FINISH'
 
 export const GAME_INIT = 'GAME_INIT'
+export const GAME_RESUME = 'GAME_RESUME'
 export const GAME_SET_STEP = 'GAME_SET_STEP'
 export const GAME_START_FRAME = 'GAME_START_FRAME'
 export const GAME_START_ROLL = 'GAME_START_ROLL'

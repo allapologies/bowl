@@ -1,7 +1,7 @@
 import * as actions from '../actions/constants'
 
 const INITIAL_STATE = {
-    step: 1
+    step: 2
 }
 
 export default function (state = INITIAL_STATE, action) {
