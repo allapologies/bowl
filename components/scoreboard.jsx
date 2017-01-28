@@ -22,15 +22,13 @@ export const ScoreBoard = (props) => {
     }
 
     const renderTable = () => {
-        _.map(props.players, (player, key) => {
+        return _.map(props.players, (player, key) => {
             return (
               <tr key={key}>
                   <td>{player.name}</td>
                   {_.map(props.frames.rolls, (rolls) => {
                       const playerData = _.filter(rolls, (roll) => roll.playerId !== player.id)
-                      return (
-                        <ScoreBoardRow player={player.name} rolls={playerData} />
-                      )
+                      return <ScoreBoardRow player={player.name} rolls={playerData} />
                   })}
               </tr>
             )

@@ -29,7 +29,7 @@ export class Game extends React.Component {
           <div>
               <h3>{playerData.name}</h3>
               <button type='button' onClick={this.handleClick}>throw!</button>
-              <ScoreBoard players={players} frames={frames} />
+              <ScoreBoard players={players.players} frames={frames} />
           </div>
         )
     }

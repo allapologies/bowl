@@ -5,14 +5,13 @@ import { Cell } from './scoreboard-row-cell'
 export const ScoreBoardRow = (props) => {
 
     return (
-      <tr>
-        <td>{props.player}</td>
-        {_.map(props.rolls, (roll) => <Cell rollsData={roll} />)}
-      </tr>
+      <div>
+          {_.map(props.rolls, (roll) => <Cell rollsData={roll}/>)}
+      </div>
     )
 }
 
 ScoreBoardRow.propTypes = {
     player: PropTypes.object,
-    rolls: PropTypes.array
+    rolls : PropTypes.array
 }

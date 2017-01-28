@@ -9,6 +9,11 @@ const INITIAL_STATE = {
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
+        case actions.GAME_START_ROLL:
+            return _.assign({}, state, {
+                currentFrame: action.nextFrame,
+                currentRoll: action.nextRoll
+            })
         case actions.GAME_INIT:
         case actions.GAME_START_FRAME:
             return _.assign({}, state, {
@@ -23,8 +28,8 @@ export default function (state = INITIAL_STATE, action) {
                     playerId: action.playerId,
                     score: action.score
                 }),
-                currentRoll: action.nextRoll,
-                currentFrame: action.nextFrame
+                // currentRoll: action.nextRoll,
+                // currentFrame: action.nextFrame
             })
         default:
             return state

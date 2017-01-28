@@ -20,11 +20,13 @@ export const getMax = (scoreData = [], playerId, frameId) => {
 }
 
 export const getNextPlayerId = (currentPlayerId, players) => {
-    const currentIndex = _.findIndex(players, (player) => player.id === currentPlayerId)
+    const currentIndex = _.findIndex(players, (player) => {
+        return player.id == currentPlayerId
+    })
     if (players[currentIndex + 1]) {
-        return players[currentIndex + 1].id
+        return { id: players[currentIndex + 1].id, index: currentIndex + 1 }
     } else {
-        return players[0].id
+        return { id: players[0].id, index: 0 }
     }
 }
 
@@ -38,14 +40,28 @@ export const getNext = (state, score) => {
     let nextRoll
     let nextPlayer
     let nextFrame
-    if (currentRoll === 1 && score < 10) {
-        nextRoll = 2
-        nextPlayer = currentPlayer
-        nextFrame = currentFrame
-    } else {
+    if (currentFrame === 10) {
+        // handle 10th frame
+    }
+
+    if (currentRoll === 1) {
+        if (score < 10) {
+            nextRoll = 2
+            nextPlayer = currentPlayer
+            nextFrame = currentFrame
+        } else {
+            nextRoll = 1
+            const nextPlayerData = getNextPlayerId(currentPlayer, players.players)
+            nextPlayer = nextPlayerData.id
+            nextFrame = (nextPlayerData.index === 0) ? getNextFrameId(state) : currentFrame
+        }
+    }
+
+    if (currentRoll === 2) {
         nextRoll = 1
-        nextPlayer = getNextPlayerId(currentPlayer, players.players)
-        nextFrame = getNextFrameId(state)
+        const nextPlayerData = getNextPlayerId(currentPlayer, players.players)
+        nextPlayer = nextPlayerData.id
+        nextFrame = (nextPlayerData.index === players.players.length - 1) ? currentFrame : getNextFrameId(state)
     }
 
     return {
