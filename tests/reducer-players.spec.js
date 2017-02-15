@@ -1,0 +1,59 @@
+/* eslint-env jasmine */
+import players from '../reducers/reducer-players'
+import { GAME_ADD_PLAYER, GAME_REMOVE_PLAYER } from '../actions/constants'
+
+describe('Reducer - players', () => {
+    it('should return the initial state', () => {
+        const expected = {
+            players: []
+        }
+        const actual = players(undefined, {})
+        expect(actual).toEqual(expected)
+    })
+    it('should handle GAME_ADD_PLAYER with empty initial state', () => {
+        const expected = {
+            players: [{ name: 'Aleksandr', id: 1 }]
+        }
+
+        const action = {
+            type: GAME_ADD_PLAYER, name: 'Aleksandr', id: 1
+        }
+
+        const actual = players(undefined, action)
+        expect(actual).toEqual(expected)
+    })
+    it('should handle GAME_ADD_PLAYER with initial state', () => {
+        const initialState = {
+            players: [{ name: 'Aleksandr', id: 1 }]
+        }
+
+        const expected = {
+            players: [{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }]
+        }
+
+
+        const action = {
+            type: GAME_ADD_PLAYER, name: 'Irina', id: 2
+        }
+
+        const actual = players(initialState, action)
+        expect(actual).toEqual(expected)
+    })
+    it('should handle GAME_REMOVE_PLAYER', () => {
+        const initialState = {
+            players: [{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }]
+        }
+
+        const expected = {
+            players: [{ name: 'Aleksandr', id: 1 }]
+        }
+
+
+        const action = {
+            type: GAME_REMOVE_PLAYER, id: 2
+        }
+
+        const actual = players(initialState, action)
+        expect(actual).toEqual(expected)
+    })
+})
