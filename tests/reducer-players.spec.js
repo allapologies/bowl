@@ -5,6 +5,7 @@ import { GAME_ADD_PLAYER, GAME_REMOVE_PLAYER } from '../actions/constants'
 describe('Reducer - players', () => {
     it('should return the initial state', () => {
         const expected = {
+            currentPlayer: null,
             players: []
         }
         const actual = players(undefined, {})
@@ -12,6 +13,7 @@ describe('Reducer - players', () => {
     })
     it('should handle GAME_ADD_PLAYER with empty initial state', () => {
         const expected = {
+            currentPlayer: null,
             players: [{ name: 'Aleksandr', id: 1 }]
         }
 
@@ -31,7 +33,6 @@ describe('Reducer - players', () => {
             players: [{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }]
         }
 
-
         const action = {
             type: GAME_ADD_PLAYER, name: 'Irina', id: 2
         }
@@ -47,7 +48,6 @@ describe('Reducer - players', () => {
         const expected = {
             players: [{ name: 'Aleksandr', id: 1 }]
         }
-
 
         const action = {
             type: GAME_REMOVE_PLAYER, id: 2
