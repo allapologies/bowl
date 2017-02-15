@@ -1,14 +1,13 @@
 /* eslint-env jasmine */
 import frames from '../reducers/reducer-frames'
-
-import {
-    GAME_INIT, GAME_START_FRAME, GAME_BALL_REACHED
-} from '../actions/constants'
+import { GAME_INIT, GAME_START_FRAME } from '../actions/constants'
 
 describe('Reducer - frames', () => {
     it('should return the initial state', () => {
         const expected = {
-            current: null, roll: null, data: {}
+            currentFrame: null,
+            currentRoll: null,
+            rolls: []
         }
 
         const actual = frames(undefined, {})
@@ -16,7 +15,9 @@ describe('Reducer - frames', () => {
     })
     it('should handle GAME_INIT', () => {
         const expected = {
-            current: 1, roll: 1, data: {}
+            currentFrame: 1,
+            currentRoll: 1,
+            rolls: []
         }
 
         const action = {
@@ -28,55 +29,20 @@ describe('Reducer - frames', () => {
     })
     it('should handle GAME_START_FRAME', () => {
         const expected = {
-            current: 6, roll: 1, data: {}
+            currentFrame: 6,
+            currentRoll: 1,
+            data: []
         }
 
         const state = {
-            current: 5, roll: 2, data: {}
+            currentFrame: 5,
+            currentRoll: 2,
+            data: []
         }
 
         const action = {
-            type: GAME_START_FRAME
-        }
-
-        const actual = frames(state, action)
-        expect(actual).toEqual(expected)
-    })
-    it('should handle GAME_THROW_BALL', () => {
-        const expected = {
-            current: 6, roll: 1, data: {}
-        }
-
-        const state = {
-            current: 5, roll: 2, data: {}
-        }
-
-        const action = {
-            type: GAME_START_FRAME
-        }
-
-        const actual = frames(state, action)
-        expect(actual).toEqual(expected)
-    })
-    it('should handle GAME_BALL_REACHED', () => {
-        const expected = {
-            current: 1, roll: 1, data: {
-                1: {
-                    1: 5, 2: 4
-                }
-            }
-        }
-
-        const state = {
-            current: 1, roll: 2, data: {
-                1: {
-                    1: 5
-                }
-            }
-        }
-
-        const action = {
-            type: GAME_BALL_REACHED, points: 4, nextRoll: 1
+            type: GAME_START_FRAME,
+            frameId: 6
         }
 
         const actual = frames(state, action)

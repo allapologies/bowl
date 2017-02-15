@@ -1,7 +1,7 @@
 /* eslint-env jasmine */
 import { getNextFrameId } from '../utility/helpers'
 
-describe('Utility functions', () => {
+xdescribe('Utility functions', () => {
     it('getNextFrameId', () => {
         const expected = 2
         const state = {

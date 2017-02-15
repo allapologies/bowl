@@ -2,8 +2,8 @@ import _ from 'lodash'
 import * as actions from '../actions/constants'
 
 const INITIAL_STATE = {
-    currentFrame: 1,
-    currentRoll: 1,
+    currentFrame: null,
+    currentRoll: null,
     rolls: []
 }
 
@@ -15,6 +15,10 @@ export default function (state = INITIAL_STATE, action) {
                 currentRoll: action.nextRoll
             })
         case actions.GAME_INIT:
+            return _.assign({}, state, {
+                currentFrame: 1,
+                currentRoll: 1
+            })
         case actions.GAME_START_FRAME:
             return _.assign({}, state, {
                 currentFrame: action.frameId,
