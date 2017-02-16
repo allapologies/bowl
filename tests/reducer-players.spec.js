@@ -1,4 +1,5 @@
 /* eslint-env jasmine */
+import { Map, List } from 'immutable'
 import players from '../reducers/reducer-players'
 import { GAME_ADD_PLAYER, GAME_REMOVE_PLAYER } from '../actions/constants'
 
@@ -9,7 +10,7 @@ describe('Reducer - players', () => {
             players: []
         }
         const actual = players(undefined, {})
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
     it('should handle GAME_ADD_PLAYER with empty initial state', () => {
         const expected = {
@@ -22,31 +23,36 @@ describe('Reducer - players', () => {
         }
 
         const actual = players(undefined, action)
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
     it('should handle GAME_ADD_PLAYER with initial state', () => {
-        const initialState = {
-            players: [{ name: 'Aleksandr', id: 1 }]
+        const expected = {
+            players: [{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }],
+            currentPlayer: null
         }
 
-        const expected = {
-            players: [{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }]
-        }
+        const initialState = Map({
+            players: List([{ name: 'Aleksandr', id: 1 }]),
+            currentPlayer: null,
+        })
+
 
         const action = {
             type: GAME_ADD_PLAYER, name: 'Irina', id: 2
         }
 
         const actual = players(initialState, action)
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
     it('should handle GAME_REMOVE_PLAYER', () => {
-        const initialState = {
-            players: [{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }]
-        }
+        const initialState = Map({
+            players: List([{ name: 'Aleksandr', id: 1 }, { name: 'Irina', id: 2 }]),
+            currentPlayer: null
+        })
 
         const expected = {
-            players: [{ name: 'Aleksandr', id: 1 }]
+            players: [{ name: 'Aleksandr', id: 1 }],
+            currentPlayer: null
         }
 
         const action = {
@@ -54,6 +60,6 @@ describe('Reducer - players', () => {
         }
 
         const actual = players(initialState, action)
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
 })

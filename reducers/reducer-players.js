@@ -1,25 +1,22 @@
-import _ from 'lodash'
+import { Map, List } from 'immutable'
 import * as actions from '../actions/constants'
 
-const INITIAL_STATE = {
-    players: [],
+const INITIAL_STATE = Map({
+    players: List([]),
     currentPlayer: null
-}
+})
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case actions.GAME_START_ROLL:
-            return _.assignIn({}, state, { currentPlayer: action.nextPlayer })
+            return state.set('currentPlayer', action.nextPlayer)
         case actions.GAME_ADD_PLAYER:
-            return _.assign({}, state, { players: _.concat(state.players, { name: action.name, id: action.id }) })
+            return state.updateIn(['players'], (playersList) => playersList.push({ name: action.name, id: action.id }))
         case actions.GAME_REMOVE_PLAYER:
-            return _.assign({}, state, { players: _.filter(state.players, (player) => player.id !== action.id) })
-        case actions.GAME_NEXT_PLAYER:
-            return _.assign({}, state, { currentPlayer: action.player })
+            return state.updateIn(['players'], (playersList) => playersList.filter((player) => player.id !== action.id))
         case actions.START_NEW_GAME:
-            return _.assign({}, state, { currentPlayer: state.players[0].id })
-        // case actions.GAME_THROW_BALL_SUCCESS:
-        //     return _.assign({}, state, { currentPlayer: action.nextPlayer })
+        case actions.GAME_NEXT_PLAYER:
+            return state.set('currentPlayer', action.player)
         default:
             return state
     }
