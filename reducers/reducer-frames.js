@@ -1,40 +1,35 @@
-import _ from 'lodash'
+import { Map, List } from 'immutable'
 import * as actions from '../actions/constants'
 
-const INITIAL_STATE = {
+const INITIAL_STATE = Map({
     currentFrame: null,
     currentRoll: null,
-    rolls: []
-}
+    rolls: List([])
+})
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case actions.GAME_START_ROLL:
-            return _.assign({}, state, {
-                currentFrame: action.nextFrame,
-                currentRoll: action.nextRoll
-            })
+            return state
+              .setIn(['currentFrame'], action.nextFrame)
+              .setIn(['currentRoll'], action.nextRoll)
         case actions.GAME_INIT:
-            return _.assign({}, state, {
-                currentFrame: 1,
-                currentRoll: 1
-            })
+            return state
+              .setIn(['currentFrame'], 1)
+              .setIn(['currentRoll'], 1)
         case actions.GAME_START_FRAME:
-            return _.assign({}, state, {
-                currentFrame: action.frameId,
-                currentRoll: 1
-            })
+            return state
+              .setIn(['currentFrame'], action.frameId)
+              .setIn(['currentRoll'], 1)
         case actions.GAME_THROW_BALL_SUCCESS:
-            return _.assign({}, state, {
-                rolls: _.concat(state.rolls, {
+            return state
+              .updateIn(['rolls'],
+                (rolls) => rolls.push({
+                    playerId: action.playerId,
                     frameId: action.frameId,
                     rollId: action.rollId,
-                    playerId: action.playerId,
                     score: action.score
-                }),
-                // currentRoll: action.nextRoll,
-                // currentFrame: action.nextFrame
-            })
+                }))
         default:
             return state
     }

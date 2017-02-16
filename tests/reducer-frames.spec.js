@@ -1,4 +1,5 @@
 /* eslint-env jasmine */
+import { Map, List } from 'immutable'
 import frames from '../reducers/reducer-frames'
 import { GAME_INIT, GAME_START_FRAME } from '../actions/constants'
 
@@ -11,7 +12,7 @@ describe('Reducer - frames', () => {
         }
 
         const actual = frames(undefined, {})
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
     it('should handle GAME_INIT', () => {
         const expected = {
@@ -25,7 +26,7 @@ describe('Reducer - frames', () => {
         }
 
         const actual = frames(undefined, action)
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
     it('should handle GAME_START_FRAME', () => {
         const expected = {
@@ -34,11 +35,11 @@ describe('Reducer - frames', () => {
             data: []
         }
 
-        const state = {
+        const state = Map({
             currentFrame: 5,
             currentRoll: 2,
             data: []
-        }
+        })
 
         const action = {
             type: GAME_START_FRAME,
@@ -46,6 +47,6 @@ describe('Reducer - frames', () => {
         }
 
         const actual = frames(state, action)
-        expect(actual).toEqual(expected)
+        expect(actual.toJS()).toEqual(expected)
     })
 })
