@@ -31,7 +31,9 @@ export function finishGame () {
 }
 
 export const startGame = () => (dispatch, getState) => {
-    const { players, currentPlayer } = playersSelector(getState())
+    const { players } = playersSelector(getState())
+    const currentPlayer = players[0].id
+
     dispatch({
         type: actions.START_NEW_GAME, players, player: currentPlayer
     })
@@ -46,8 +48,6 @@ export const throwBall = () => (dispatch, getState) => {
     const { currentFrame, currentRoll, data } = framesSelector(state)
     const max = getMax(data[currentPlayer][currentFrame])
     const score = getRandomInt(0, max)
-
-    // const nextState = getNext(state, score)
 
     dispatch({
         type: actions.GAME_THROW_BALL_SUCCESS,
@@ -69,24 +69,4 @@ export const throwBall = () => (dispatch, getState) => {
         ...nextState
     })
 
-}
-
-
-
-export const resumeGame = (players, step = 1) => {
-    return (dispatch) => {
-        _.forEach(players, (player) => {
-            dispatch(addPlayer(player, step))
-        })
-
-        dispatch({
-            type: actions.GAME_NEXT_PLAYER,
-            player: '1'
-        })
-
-        dispatch({
-            type: actions.GAME_SET_STEP,
-            step
-        })
-    }
 }
