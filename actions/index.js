@@ -36,7 +36,7 @@ export const replayGame = () => ({ type: actions.REPLAY_GAME })
 export const throwBall = () => (dispatch, getState) => {
     dispatch({ type: actions.GAME_THROW_BALL })
     const state = getState()
-    const { currentPlayer } = playersSelector(state)
+    const { currentPlayer, players } = playersSelector(state)
     const { currentFrame, currentRoll, data } = framesSelector(state)
     const max = getMax(data[currentPlayer][currentFrame])
     const score = getRandomInt(0, max)
@@ -51,11 +51,11 @@ export const throwBall = () => (dispatch, getState) => {
         playerId: currentPlayer,
     })
 
-    // const nextState = getNext(state, score)
-    // dispatch({
-    //     type: actions.GAME_START_ROLL,
-    //     ...nextState
-    // })
+    const nextState = getNext(currentPlayer, players, currentFrame, currentRoll, score)
+    dispatch({
+        type: actions.GAME_START_ROLL,
+        ...nextState
+    })
 
 }
 

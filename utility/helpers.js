@@ -19,12 +19,9 @@ export const getNextPlayerId = (currentPlayerId, players) => {
     }
 }
 
-export const getNextFrameId = (state) => state.frames.currentFrame + 1
+export const getNextFrameId = (frame) => frame + 1
 
-export const getNext = (state, score) => {
-    const { frames, players } = state
-    const { currentFrame, currentRoll } = frames
-    const { currentPlayer } = players
+export const getNext = (currentPlayer, players, currentFrame, currentRoll, score) => {
 
     let nextRoll
     let nextPlayer
@@ -40,17 +37,17 @@ export const getNext = (state, score) => {
             nextFrame = currentFrame
         } else {
             nextRoll = 1
-            const nextPlayerData = getNextPlayerId(currentPlayer, players.players)
+            const nextPlayerData = getNextPlayerId(currentPlayer, players)
             nextPlayer = nextPlayerData.id
-            nextFrame = (nextPlayerData.index === 0) ? getNextFrameId(state) : currentFrame
+            nextFrame = (nextPlayerData.index === 0) ? getNextFrameId(currentFrame) : currentFrame
         }
     }
 
     if (currentRoll === 2) {
         nextRoll = 1
-        const nextPlayerData = getNextPlayerId(currentPlayer, players.players)
+        const nextPlayerData = getNextPlayerId(currentPlayer, players)
         nextPlayer = nextPlayerData.id
-        nextFrame = (nextPlayerData.index === players.players.length - 1) ? currentFrame : getNextFrameId(state)
+        nextFrame = (nextPlayerData.index === players.length - 1) ? currentFrame : getNextFrameId(currentFrame)
     }
 
     return {

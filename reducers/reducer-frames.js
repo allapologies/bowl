@@ -1,4 +1,4 @@
-import { Map } from 'immutable'
+import { Map, fromJS } from 'immutable'
 import _ from 'lodash'
 import * as actions from '../actions/constants'
 
@@ -29,9 +29,9 @@ export default function (state = INITIAL_STATE, action) {
             const playersObj = {}
             _.forEach(action.players, (player) => playersObj[`${player.id}`] = {})
             return state
-              .setIn(['data'], playersObj)
-              .set('currentFrame', 1)
-              .set('currentRoll', 1)
+              .setIn(['data'], fromJS(playersObj))
+              .setIn(['currentFrame'], 1)
+              .setIn(['currentRoll'], 1)
         default:
             return state
     }

@@ -9,7 +9,7 @@ const INITIAL_STATE = Map({
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case actions.GAME_START_ROLL:
-            return state.set('currentPlayer', action.nextPlayer)
+            return state.setIn(['currentPlayer'], action.nextPlayer)
         case actions.GAME_ADD_PLAYER:
             return state.updateIn(['players'], (playersList) => playersList.push({ name: action.name, id: action.id }))
         case actions.GAME_REMOVE_PLAYER:
