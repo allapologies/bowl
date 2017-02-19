@@ -2,20 +2,9 @@ import _ from 'lodash'
 
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-export const getMax = (scoreData = [], playerId, frameId) => {
+export const getMax = (frameData = {}) => {
     let max = 10
-
-    _.forEach(scoreData, (record) => {
-        if (record.playerId === playerId) {
-            if (record.frameId === frameId) {
-                if (record.score !== null) {
-                    max -= record.score
-                }
-            }
-        }
-
-    })
-
+    _.forIn(frameData, (val) => max -= val)
     return max
 }
 
