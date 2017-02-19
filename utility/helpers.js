@@ -21,13 +21,17 @@ export const getNextPlayerId = (currentPlayerId, players) => {
 
 export const getNextFrameId = (frame) => frame + 1
 
-export const getNext = (currentPlayer, players, currentFrame, currentRoll, score) => {
+export const getNext = (currentPlayer, players, currentFrame, currentRoll, score, data) => {
 
     let nextRoll
     let nextPlayer
     let nextFrame
-    if (currentFrame === 10) {
-        // handle 10th frame
+    if (currentFrame === 10 && currentRoll === 2) {
+        if (getMax(data[currentPlayer][currentFrame]) === 10) {
+            nextRoll = 3
+            nextPlayer = currentPlayer
+            nextFrame = 10
+        }
     }
 
     if (currentRoll === 1) {

@@ -51,7 +51,7 @@ export const throwBall = () => (dispatch, getState) => {
         playerId: currentPlayer,
     })
 
-    const nextState = getNext(currentPlayer, players, currentFrame, currentRoll, score)
+    const nextState = getNext(currentPlayer, players, currentFrame, currentRoll, score, data)
     dispatch({
         type: actions.GAME_START_ROLL,
         ...nextState
