@@ -28,7 +28,10 @@ export default function (state = INITIAL_STATE, action) {
         case actions.START_NEW_GAME:
             const playersObj = {}
             _.forEach(action.players, (player) => playersObj[`${player.id}`] = {})
-            return state.setIn(['data'], playersObj)
+            return state
+              .setIn(['data'], playersObj)
+              .set('currentFrame', 1)
+              .set('currentRoll', 1)
         default:
             return state
     }

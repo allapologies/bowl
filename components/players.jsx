@@ -2,9 +2,10 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import { players } from '../selectors'
 
 @connect((state) => ({
-    players: state.players.players,
+    players: players(state)
 }), (dispatch) => ({
     addPlayer: (name) => dispatch(actions.addPlayer(name)),
     removePlayer: (id) => dispatch(actions.removePlayer(id)),

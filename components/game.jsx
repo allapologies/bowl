@@ -1,12 +1,13 @@
 import React from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import { ScoreBoard } from './scoreboard'
-import _ from 'lodash'
+import { framesSelector, playersSelector } from '../selectors'
 
 @connect((state) => ({
-    players: state.players,
-    frames: state.frames
+    players: playersSelector(state),
+    frames: framesSelector(state)
 }), (dispatch) => ({
     throwBall: () => dispatch(actions.throwBall())
 }))
@@ -15,7 +16,7 @@ export class Game extends React.Component {
     static propTypes = {
         players: React.PropTypes.shape({
             players: React.PropTypes.array,
-            current: React.PropTypes.string
+            currentPlayer: React.PropTypes.string
         }),
         throwBall: React.PropTypes.func.isRequired
     }
@@ -29,7 +30,7 @@ export class Game extends React.Component {
           <div>
               <h3>{playerData.name}</h3>
               <button type='button' onClick={this.handleClick}>throw!</button>
-              <ScoreBoard players={players.players} frames={frames} />
+              {/*<ScoreBoard players={players.players} frames={frames} />*/}
           </div>
         )
     }
