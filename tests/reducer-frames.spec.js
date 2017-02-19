@@ -1,7 +1,7 @@
 /* eslint-env jasmine */
-import { Map } from 'immutable'
+import { Map, fromJS } from 'immutable'
 import frames from '../reducers/reducer-frames'
-import { GAME_INIT, GAME_START_FRAME, START_NEW_GAME } from '../actions/constants'
+import { GAME_INIT, GAME_START_FRAME, START_NEW_GAME, GAME_THROW_BALL_SUCCESS } from '../actions/constants'
 
 describe('Reducer - frames', () => {
     it('should return the initial state', () => {
@@ -74,6 +74,70 @@ describe('Reducer - frames', () => {
 
         const actual = frames(undefined, action)
 
+        expect(actual.toJS()).toEqual(expected)
+    })
+
+    it('handle THROW BALL SUCCESS for first roll', () => {
+        const state = fromJS({
+            data: {
+                1: {}
+            }
+        })
+
+        const action = {
+            type: GAME_THROW_BALL_SUCCESS,
+            playerId: 1,
+            frameId: 1,
+            rollId: 1,
+            score: 4
+        }
+
+        const expected = {
+            data: {
+                1: {
+                    1: {
+                        1: 4
+                    }
+                }
+            }
+        }
+
+        const actual = frames(state, action)
+
+        expect(actual.toJS()).toEqual(expected)
+    })
+
+    it('handle THROW BALL SUCCESS for second roll', () => {
+        const state = fromJS({
+            data: {
+                5: {
+                    3: {
+                        1: 6
+                    }
+                }
+            }
+        })
+
+        const action = {
+            type: GAME_THROW_BALL_SUCCESS,
+            playerId: 5,
+            frameId: 3,
+            rollId: 2,
+            score: 2
+        }
+
+        const expected = {
+            data: {
+                5: {
+                    3: {
+                        1: 6,
+                        2: 2
+                    }
+                }
+            }
+        }
+
+        const actual = frames(state, action)
         expect(actual.toJS()).toEqual(expected)
     })
 })
