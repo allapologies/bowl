@@ -8,12 +8,16 @@ export const getMax = (frameData = {}) => {
     return max
 }
 
-export const getNextPlayerId = (currentPlayerId, players) => {
-    const currentIndex = _.findIndex(players, (player) => {
+const getPlayerIndex = (currentPlayerId, players) => {
+    return _.findIndex(players, (player) => {
         return player.id == currentPlayerId
     })
-    if (players[currentIndex + 1]) {
-        return { id: players[currentIndex + 1].id, index: currentIndex + 1 }
+}
+
+export const getNextPlayerId = (currentPlayerId, players) => {
+    const index = getPlayerIndex(currentPlayerId, players)
+    if (players[index + 1]) {
+        return { id: players[index + 1].id, index: index + 1 }
     } else {
         return { id: players[0].id, index: 0 }
     }
@@ -59,4 +63,22 @@ export const getNext = (currentPlayer, players, currentFrame, currentRoll, score
         nextPlayer,
         nextFrame
     }
+}
+
+export const isLastPlayer = (currentPlayer, players) => {
+    return getPlayerIndex(currentPlayer, players) === players.length - 1
+}
+
+export const isLastRoll = (currentFrame, currentRoll, data) => {
+    if (currentFrame !== 10) {
+        return false
+    } else if (currentRoll === 1) {
+        return false
+    }
+
+    if (currentRoll === 3) {
+        return true
+    }
+
+    return getMax(data[currentFrame]) !== 0
 }

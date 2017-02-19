@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import * as actions from './constants'
-import { getRandomInt, getNext, getMax } from '../utility/helpers'
+import { getRandomInt, getNext, getMax, isLastPlayer, isLastRoll } from '../utility/helpers'
 import { framesSelector, playersSelector } from '../selectors'
 
 export const addPlayer = (name) => (dispatch) => {
@@ -21,6 +21,12 @@ export const removePlayer = (id) => {
 export function initGame () {
     return {
         type: actions.GAME_INIT
+    }
+}
+
+export function finishGame () {
+    return {
+        type: actions.GAME_FINISH
     }
 }
 
@@ -51,7 +57,13 @@ export const throwBall = () => (dispatch, getState) => {
         playerId: currentPlayer,
     })
 
+    if (isLastPlayer(currentPlayer, players)
+      && isLastRoll(currentFrame, currentRoll, data[currentPlayer])) {
+        return dispatch(finishGame())
+    }
+
     const nextState = getNext(currentPlayer, players, currentFrame, currentRoll, score, data)
+
     dispatch({
         type: actions.GAME_START_ROLL,
         ...nextState
