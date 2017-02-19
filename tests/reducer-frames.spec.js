@@ -1,14 +1,14 @@
 /* eslint-env jasmine */
-import { Map, List } from 'immutable'
+import { Map } from 'immutable'
 import frames from '../reducers/reducer-frames'
-import { GAME_INIT, GAME_START_FRAME } from '../actions/constants'
+import { GAME_INIT, GAME_START_FRAME, START_NEW_GAME } from '../actions/constants'
 
 describe('Reducer - frames', () => {
     it('should return the initial state', () => {
         const expected = {
             currentFrame: null,
             currentRoll: null,
-            rolls: []
+            data: {}
         }
 
         const actual = frames(undefined, {})
@@ -18,7 +18,7 @@ describe('Reducer - frames', () => {
         const expected = {
             currentFrame: 1,
             currentRoll: 1,
-            rolls: []
+            data: {}
         }
 
         const action = {
@@ -32,13 +32,13 @@ describe('Reducer - frames', () => {
         const expected = {
             currentFrame: 6,
             currentRoll: 1,
-            data: []
+            data: {}
         }
 
         const state = Map({
             currentFrame: 5,
             currentRoll: 2,
-            data: []
+            data: {}
         })
 
         const action = {
@@ -47,6 +47,33 @@ describe('Reducer - frames', () => {
         }
 
         const actual = frames(state, action)
+        expect(actual.toJS()).toEqual(expected)
+    })
+
+    it('creates properties in data map when starting the game', () => {
+        const expected = {
+            currentFrame: null,
+            currentRoll: null,
+            data: {
+                1: {},
+                2: {},
+                10: {},
+                55: {}
+            }
+        }
+
+        const action = {
+            type: START_NEW_GAME,
+            players: [
+                { name: 'Aleksandr', id: 1 },
+                { name: 'Irina', id: 2 },
+                { name: 'Michael', id: 10 },
+                { name: 'Kurt', id: 55 },
+            ]
+        }
+
+        const actual = frames(undefined, action)
+
         expect(actual.toJS()).toEqual(expected)
     })
 })
