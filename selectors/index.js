@@ -1,1 +1,4 @@
-export { framesSelector, playersSelector, players, currentPlayer } from './selectors'
+export { getFramesSlice, getPlayersSlice,
+    playersSelector, currentPlayerSelector, currentFrameAndRollSelector,
+    getCurrentPlayerMeta
+} from './selectors'

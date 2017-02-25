@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 import { ScoreBoardRow } from './scoreboard-row'
+import { currentFrameAndRollSelector } from '../selectors'
 
-export const ScoreBoard = (props) => {
-    const renderHead = (frames) => {
-        let heading = new Array(frames)
-        const d = _.map(heading, (id, key) => {
+export const ScoreBoardRaw = (props) => {
+    const renderHead = () => {
+        let heading = new Array(10)
+        const cell = _.map(heading, (id, key) => {
             const frameNum = key + 1
             return (
               <th key={frameNum}>
@@ -15,37 +17,35 @@ export const ScoreBoard = (props) => {
         })
         return (
           <tr>
-              <td>Frame:</td>
-              {d}
+              <td>Frame</td>
+              {cell}
+              <td>Total</td>
           </tr>
         )
     }
 
-    const renderTable = () => {
-        return _.map(props.players, (player, key) => {
-            return (
-              <tr key={key}>
-                  <td>{player.name}</td>
-                  {_.map(props.frames.rolls, (rolls) => {
-                      const playerData = _.filter(rolls, (roll) => roll.playerId !== player.id)
-                      return <ScoreBoardRow player={player.name} rolls={playerData} />
-                  })}
-              </tr>
-            )
-        })
-    }
+    const renderTable = () => (
+      _.map(props.players, (player, key) => (
+        <ScoreBoardRow key={key} player={player.name} rolls={frames} />
+      ))
+    )
 
     return (
       <table className="table table-bordered">
           <tbody>
-          {renderHead(props.frames.currentFrame)}
-          {renderTable()}
+          {renderHead()}
+          {/*{renderTable()}*/}
           </tbody>
       </table>
     )
 }
 
-ScoreBoard.propTypes = {
+ScoreBoardRaw.propTypes = {
     players: PropTypes.arrayOf(PropTypes.string),
-    frames: PropTypes.object
+    frames : PropTypes.object
 }
+
+
+export const ScoreBoard = connect((state) => ({
+    currentFrameAndRoll: currentFrameAndRollSelector(state),
+}))(ScoreBoardRow)

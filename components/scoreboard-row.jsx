@@ -4,14 +4,22 @@ import { Cell } from './scoreboard-row-cell'
 
 export const ScoreBoardRow = (props) => {
 
+    const { player, rolls } = props
+
     return (
-      <div>
-          {_.map(props.rolls, (roll) => <Cell rollsData={roll}/>)}
-      </div>
+      <tr>
+          <td>
+              {player}
+          </td>
+          {_.map(new Array(10), (roll, index) => <Cell key={`cell${index}`} roll={roll} />)}
+          <td>
+              'Total'
+          </td>
+      </tr>
     )
 }
 
 ScoreBoardRow.propTypes = {
-    player: PropTypes.object,
-    rolls : PropTypes.array
+    player: PropTypes.string,
+    rolls: PropTypes.array
 }

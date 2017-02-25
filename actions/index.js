@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import * as actions from './constants'
 import { getRandomInt, getNext, getMax, isLastPlayer, isLastRoll } from '../utility/helpers'
-import { framesSelector, playersSelector } from '../selectors'
+import { getFramesSlice, getPlayersSlice, playersSelector, currentPlayerSelector } from '../selectors'
 
 export const addPlayer = (name) => (dispatch) => {
     dispatch({
@@ -31,7 +31,9 @@ export function finishGame () {
 }
 
 export const startGame = () => (dispatch, getState) => {
-    const { players } = playersSelector(getState())
+    const state = getState()
+
+    const players = playersSelector(state)
     const currentPlayer = players[0].id
 
     dispatch({
@@ -44,8 +46,8 @@ export const replayGame = () => ({ type: actions.REPLAY_GAME })
 export const throwBall = () => (dispatch, getState) => {
     dispatch({ type: actions.GAME_THROW_BALL })
     const state = getState()
-    const { currentPlayer, players } = playersSelector(state)
-    const { currentFrame, currentRoll, data } = framesSelector(state)
+    const { currentPlayer, players } = getPlayersSlice(state)
+    const { currentFrame, currentRoll, data } = getFramesSlice(state)
     const max = getMax(data[currentPlayer][currentFrame])
     const score = getRandomInt(0, max)
 
