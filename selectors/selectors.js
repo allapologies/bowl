@@ -11,7 +11,7 @@ export const getFramesSlice = createSelector(
 
 export const framesDataSelector = createImmutableSelector(
   [getFramesSlice],
-  (framesSlice) => framesSlice.data.toJS()
+  (framesSlice) => framesSlice.get('data').toJS()
 )
 
 export const currentScoreSelector = createSelector(
@@ -37,7 +37,8 @@ export const currentScoreSelector = createSelector(
 export const currentFrameAndRollSelector = createSelector(
   [getFramesSlice],
   (framesSlice) => {
-      const { currentFrame, currentRoll } = framesSlice
+      const currentFrame = framesSlice.get('currentFrame')
+      const currentRoll = framesSlice.get('currentRoll')
       return { currentFrame, currentRoll }
   }
 )
@@ -57,9 +58,10 @@ export const currentPlayerSelector = createImmutableSelector(
   (playersSlice) => {
       debugger
       return playersSlice.get('currentPlayer')
-  })
+  }
+)
 
-export const getCurrentPlayerMeta = createSelector(
+export const getCurrentPlayerMeta = createImmutableSelector(
   [playersSelector, currentPlayerSelector],
   (players, currentPlayer) => {
       const data = _.find(

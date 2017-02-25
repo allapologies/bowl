@@ -14,7 +14,7 @@ export class Game extends React.Component {
     static propTypes = {
         currentPlayer: React.PropTypes.shape({
             name: React.PropTypes.string,
-            id: React.PropTypes.number
+            id: React.PropTypes.string
         }),
         throwBall: React.PropTypes.func.isRequired
     }
