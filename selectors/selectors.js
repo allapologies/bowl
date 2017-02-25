@@ -17,17 +17,20 @@ export const framesDataSelector = createImmutableSelector(
 export const currentScoreSelector = createSelector(
   [framesDataSelector],
   (data) => {
-      let scoreByPlayers = []
+      let scoreByPlayers = {}
 
       _.forIn(data, (playerData, playerId) => {
-          let score = {}
-          score.playerId = playerId
-          score.data = {}
-          _.forIn(playerData, (frames, frameNum) => {
+          scoreByPlayers[playerId] = []
 
+          _.forIn(data[playerId], (frames, frameNum) => {
+              const frameArr = []
+
+              _.forIn(data[playerId][frameNum], (rollScore) => {
+                  frameArr.push(rollScore)
+              })
+
+              scoreByPlayers[playerId].push(frameArr)
           })
-
-          scoreByPlayers.push(score)
       })
 
       return scoreByPlayers
