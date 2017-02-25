@@ -24,12 +24,14 @@ export default function (state = INITIAL_STATE, action) {
               .setIn(['currentRoll'], 1)
         case actions.GAME_THROW_BALL_SUCCESS:
             return state
-              .setIn(['data', `${action.playerId}`, `${action.frameId}`, `${action.rollId}`], action.score)
+              .updateIn(['data', action.playerId], (arr) => arr.push(Map({
+                    frameId: action.frameId,
+                    rollId: action.rollId,
+                    score: action.score
+                }))
+              )
         case actions.START_NEW_GAME:
-            const playersObj = {}
-            _.forEach(action.players, (player) => playersObj[`${player.id}`] = {})
             return state
-              .setIn(['data'], fromJS(playersObj))
               .setIn(['currentFrame'], 1)
               .setIn(['currentRoll'], 1)
         default:

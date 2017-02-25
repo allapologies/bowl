@@ -1,5 +1,5 @@
 /* eslint-env jasmine */
-import { Map, fromJS } from 'immutable'
+import { Map, List, fromJS } from 'immutable'
 import * as matchers from 'jasmine-immutable-matchers'
 import frames from '../reducers/reducer-frames'
 import { GAME_INIT, GAME_START_FRAME, START_NEW_GAME, GAME_THROW_BALL_SUCCESS } from '../actions/constants'
@@ -80,67 +80,136 @@ describe('Reducer - frames', () => {
         expect(actual).toEqualImmutable(expected)
     })
 
-    it('handle THROW BALL SUCCESS for first roll', () => {
-        const state = fromJS({
-            data: {
-                1: {}
-            }
-        })
+    xit('handle THROW BALL SUCCESS for first roll', () => {
 
         const action = {
             type: GAME_THROW_BALL_SUCCESS,
-            playerId: 1,
+            playerId: '1',
             frameId: 1,
             rollId: 1,
             score: 4
         }
 
-        const expected = {
+        const expected = fromJS({
+            currentFrame: null,
+            currentRoll: null,
             data: {
-                1: {
-                    1: {
-                        1: 4
+                '1': [
+                    {
+                        frameId: 1,
+                        rollId: 1,
+                        score: 4
                     }
-                }
+                ]
             }
-        }
+        })
 
-        const actual = frames(state, action)
+        const actual = frames(undefined, action)
 
-        expect(actual.toJS()).toEqual(expected)
+        expect(actual).toEqualImmutable(expected)
     })
 
     it('handle THROW BALL SUCCESS for second roll', () => {
-        const state = fromJS({
-            data: {
-                5: {
-                    3: {
-                        1: 6
-                    }
-                }
-            }
+        const state = Map({
+            currentFrame: null,
+            currentRoll: null,
+            data: Map({
+                '5': List([Map(
+                    {
+                        frameId: 1,
+                        rollId: 1,
+                        score: 4
+                    })
+                ])
+            })
         })
 
         const action = {
             type: GAME_THROW_BALL_SUCCESS,
-            playerId: 5,
+            playerId: '5',
             frameId: 3,
             rollId: 2,
             score: 2
         }
 
-        const expected = {
-            data: {
-                5: {
-                    3: {
-                        1: 6,
-                        2: 2
-                    }
-                }
-            }
-        }
+        const expected = Map({
+            currentFrame: null,
+            currentRoll: null,
+            data: Map({
+                '5': List([
+                    Map({
+                        frameId: 1,
+                        rollId: 1,
+                        score: 4
+                    }),
+                    Map({
+                        frameId: 3,
+                        rollId: 2,
+                        score: 2
+                    })
+                ])
+            })
+        })
 
         const actual = frames(state, action)
-        expect(actual.toJS()).toEqual(expected)
+        expect(actual).toEqualImmutable(expected)
+    })
+
+    xit('handle THROW BALL SUCCESS for different players', () => {
+        const state = fromJS({
+            currentFrame: null,
+            currentRoll: null,
+            data: {
+                '2': [
+                    {
+                        frameId: 1,
+                        rollId: 1,
+                        score: 4
+                    },
+                    {
+                        frameId: 1,
+                        rollId: 2,
+                        score: 3
+                    }
+                ]
+            }
+        })
+
+        const action = {
+            type: GAME_THROW_BALL_SUCCESS,
+            playerId: '2',
+            frameId: 2,
+            rollId: 1,
+            score: 8
+        }
+
+        const expected = fromJS({
+            currentFrame: null,
+            currentRoll: null,
+            data: {
+                '5': [
+                    {
+                        frameId: 1,
+                        rollId: 1,
+                        score: 4
+                    },
+                    {
+                        frameId: 3,
+                        rollId: 2,
+                        score: 2
+                    }
+                ],
+                '2': [
+                    {
+                        frameId: 2,
+                        rollId: 1,
+                        score: 8
+                    }
+                ]
+            }
+        })
+
+        const actual = frames(state, action)
+        expect(actual).toEqualImmutable(expected)
     })
 })
