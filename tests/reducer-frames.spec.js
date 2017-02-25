@@ -1,9 +1,12 @@
 /* eslint-env jasmine */
 import { Map, fromJS } from 'immutable'
+import * as matchers from 'jasmine-immutable-matchers'
 import frames from '../reducers/reducer-frames'
 import { GAME_INIT, GAME_START_FRAME, START_NEW_GAME, GAME_THROW_BALL_SUCCESS } from '../actions/constants'
 
 describe('Reducer - frames', () => {
+    beforeEach(() => jasmine.addMatchers(matchers))
+
     it('should return the initial state', () => {
         const expected = {
             currentFrame: null,
