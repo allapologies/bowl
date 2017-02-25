@@ -27,7 +27,7 @@ export class Game extends React.Component {
           <div>
               <h3>{currentPlayer.name}</h3>
               <button type='button' onClick={this.handleClick}>throw!</button>
-              {/*<ScoreBoard />*/}
+              <ScoreBoard />
           </div>
         )
     }

@@ -55,10 +55,7 @@ export const playersSelector = createImmutableSelector(
 
 export const currentPlayerSelector = createImmutableSelector(
   [getPlayersSlice],
-  (playersSlice) => {
-      debugger
-      return playersSlice.get('currentPlayer')
-  }
+  (playersSlice) => playersSlice.get('currentPlayer')
 )
 
 export const getCurrentPlayerMeta = createImmutableSelector(
