@@ -11,9 +11,6 @@ module.exports = function (config) {
         './tests/**/*.spec.js'
     ]
 
-    // lets decide what reporters we need depending on whether we need coverage:
-    const reportersList = ['progress', 'jasmine-diff', 'coverage']
-
     config.set({
         basePath: '',
         frameworks: ['jasmine'],
@@ -39,7 +36,7 @@ module.exports = function (config) {
                     {
                         test: /\.jsx?$/,
                         exclude: [/node_modules/, /\.spec\.jsx?$/],
-                        loaders: ['babel-loader?plugins=istanbul']
+                        loaders: ['babel-loader']
                     },
                     {
                         test: /\.spec\.jsx?$/,
@@ -50,7 +47,6 @@ module.exports = function (config) {
             },
 
             resolve: {
-//                root: path.join(__dirname, './src/'),
                 extensions: ['', '.jsx', '.js', '.json']
             },
             plugins: [
@@ -62,16 +58,12 @@ module.exports = function (config) {
 
         webpackMiddleware: {
             noInfo: true
-            // chunks: true
         },
 
         plugins: [
             'karma-webpack',
             'karma-jasmine',
             'karma-chrome-launcher',
-            'karma-coverage',
-            'karma-jasmine-diff-reporter'
-        ],
-        reporters: reportersList
+        ]
     })
 }
