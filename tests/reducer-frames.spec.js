@@ -77,7 +77,7 @@ describe('Reducer - frames', () => {
 
         const actual = frames(undefined, action)
 
-        expect(actual.toJS()).toEqual(expected)
+        expect(actual).toEqualImmutable(expected)
     })
 
     it('handle THROW BALL SUCCESS for first roll', () => {
