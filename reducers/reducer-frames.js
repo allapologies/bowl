@@ -1,5 +1,4 @@
-import { Map, fromJS } from 'immutable'
-import _ from 'lodash'
+import { Map } from 'immutable'
 import * as actions from '../actions/constants'
 
 const INITIAL_STATE = Map({
@@ -24,12 +23,14 @@ export default function (state = INITIAL_STATE, action) {
               .setIn(['currentRoll'], 1)
         case actions.GAME_THROW_BALL_SUCCESS:
             return state
-              .updateIn(['data', action.playerId], (arr) => arr.push(Map({
-                    frameId: action.frameId,
-                    rollId: action.rollId,
-                    score: action.score
-                }))
-              )
+              .updateIn(['data', action.playerId], (arr) => {
+                  const { frameId, rollId, score } = action
+                  return arr.push(Map({
+                      frameId,
+                      rollId,
+                      score
+                  }))
+              })
         case actions.START_NEW_GAME:
             return state
               .setIn(['currentFrame'], 1)
