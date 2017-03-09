@@ -7,8 +7,8 @@ module.exports = function (config) {
     'use strict'
 
     const testFiles = [
-        './tests/**/*.spec.jsx',
-        './tests/**/*.spec.js'
+        './**/tests/*.spec.jsx',
+        './**/tests/*.spec.js'
     ]
 
     config.set({

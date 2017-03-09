@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
 import { Map } from 'immutable'
-import { currentScoreSelector } from '../selectors/selectors'
+import { currentScoreSelector } from '../selectors'
 
 describe('selectors: ', () => {
     describe('currentScore returns score data for ', () => {

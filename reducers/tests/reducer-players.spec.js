@@ -1,7 +1,7 @@
 /* eslint-env jasmine */
 import { Map, List } from 'immutable'
-import players from '../reducers/reducer-players'
-import { GAME_ADD_PLAYER, GAME_REMOVE_PLAYER } from '../actions/constants'
+import players from '../reducer-players'
+import { GAME_ADD_PLAYER, GAME_REMOVE_PLAYER } from '../../actions/constants'
 
 describe('Reducer - players', () => {
     it('should return the initial state', () => {

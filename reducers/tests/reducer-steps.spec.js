@@ -1,6 +1,6 @@
 /* eslint-env jasmine */
-import steps from '../reducers/reducer-steps'
-import { GAME_SET_STEP } from '../actions/constants'
+import steps from '../reducer-steps'
+import { GAME_SET_STEP } from '../../actions/constants'
 
 describe('Reducer - steps', () => {
     it('should return the initial state', () => {

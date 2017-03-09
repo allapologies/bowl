@@ -1,5 +1,4 @@
-/* eslint-env jasmine */
-import { getMax } from '../utility/helpers'
+import { getMax } from '../helpers'
 
 describe('helpers', () => {
     describe('getMax', () => {
