@@ -80,7 +80,15 @@ describe('Reducer - frames', () => {
         expect(actual).toEqualImmutable(expected)
     })
 
-    xit('handle THROW BALL SUCCESS for first roll', () => {
+    it('handle THROW BALL SUCCESS for first roll', () => {
+
+        const state = Map({
+            currentFrame: null,
+            currentRoll: null,
+            data: Map({
+                '1': List([])
+            })
+        })
 
         const action = {
             type: GAME_THROW_BALL_SUCCESS,
@@ -90,21 +98,21 @@ describe('Reducer - frames', () => {
             score: 4
         }
 
-        const expected = fromJS({
+        const expected = Map({
             currentFrame: null,
             currentRoll: null,
-            data: {
-                '1': [
+            data: Map({
+                '1': List([
                     {
                         frameId: 1,
                         rollId: 1,
                         score: 4
                     }
-                ]
-            }
+                ])
+            })
         })
 
-        const actual = frames(undefined, action)
+        const actual = frames(state, action)
 
         expect(actual).toEqualImmutable(expected)
     })
@@ -114,12 +122,12 @@ describe('Reducer - frames', () => {
             currentFrame: null,
             currentRoll: null,
             data: Map({
-                '5': List([Map(
+                '5': List([
                     {
                         frameId: 1,
                         rollId: 1,
                         score: 4
-                    })
+                    }
                 ])
             })
         })
@@ -137,16 +145,16 @@ describe('Reducer - frames', () => {
             currentRoll: null,
             data: Map({
                 '5': List([
-                    Map({
+                    {
                         frameId: 1,
                         rollId: 1,
                         score: 4
-                    }),
-                    Map({
+                    },
+                    {
                         frameId: 3,
                         rollId: 2,
                         score: 2
-                    })
+                    }
                 ])
             })
         })
