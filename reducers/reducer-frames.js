@@ -1,11 +1,11 @@
-import { Map as iMap } from 'immutable'
+import { Map as iMap, List as iList } from 'immutable'
 
 import * as actions from '../actions/constants'
 
 const INITIAL_STATE = iMap({
     currentFrame: null,
     currentRoll: null,
-    data: iMap()
+    data: iList([])
 })
 
 export default function (state = INITIAL_STATE, action) {
@@ -24,8 +24,8 @@ export default function (state = INITIAL_STATE, action) {
                 .setIn(['currentRoll'], 1)
         case actions.GAME_THROW_BALL_SUCCESS:
             return state
-                .updateIn(['data', action.playerId], (arr) =>
-                    arr.push(iMap({
+                .updateIn(['data'],
+                    (arr) => arr.push(iMap({
                         frameId: action.frameId,
                         rollId: action.rollId,
                         score: action.score

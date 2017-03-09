@@ -1,25 +1,58 @@
-/* eslint-env jasmine */
-import { Map } from 'immutable'
+import { Map as iMap, List as iList } from 'immutable'
 import { currentScoreSelector } from '../selectors'
 
 describe('selectors: ', () => {
+
     describe('currentScore returns score data for ', () => {
 
-        it('first player, first frame and first roll', () => {
+        xit('empty set', () => {
 
-            const expected = {
-                '1': [[2]]
-            }
+            const expected = [
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                }
+            ]
 
             const state = {
-                frames: Map({
-                    data: Map({
-                        '1': Map({
-                            '1': Map({
-                                '1': 2
-                            })
-                        })
-                    })
+                frames: iMap({
+                    data: iList([])
                 })
             }
 
@@ -27,22 +60,109 @@ describe('selectors: ', () => {
             expect(actual).toEqual(expected)
         })
 
-        it('first player, first frame and 2 rolls', () => {
+        it('first roll of first frame', () => {
 
-            const expected = {
-                '1': [[2, 3]]
-            }
+            const expected = [
+                {
+                    firstRoll: 3,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                }
+            ]
+
+            const state = [{
+                frameId: 1,
+                rollId: 1,
+                score: 3
+            }]
+
+            const actual = currentScoreSelector.resultFunc(state)
+            expect(actual).toEqual(expected)
+        })
+
+        xit('first frame and 2 rolls', () => {
+
+            const expected = [
+                {
+                    firstRoll: 2,
+                    secondRoll: 3
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                }
+            ]
 
             const state = {
-                frames: Map({
-                    data: Map({
-                        '1': Map({
-                            '1': Map({
-                                '1': 2,
-                                '2': 3
-                            })
-                        })
-                    })
+                frames: iMap({
+                    data: iList([[2, 3]])
                 })
             }
 
@@ -50,25 +170,54 @@ describe('selectors: ', () => {
             expect(actual).toEqual(expected)
         })
 
-        it('first player, 2 frames and 1 roll', () => {
+        xit('2 frames and 1 roll', () => {
 
-            const expected = {
-                '1': [[2, 3], [1]]
-            }
+            const expected = [
+                {
+                    firstRoll: 5,
+                    secondRoll: 2
+                },
+                {
+                    firstRoll: 7,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null
+                }
+            ]
 
             const state = {
-                frames: Map({
-                    data: Map({
-                        '1': Map({
-                            '1': Map({
-                                '1': 2,
-                                '2': 3
-                            }),
-                            '2': Map({
-                                '1': 1
-                            })
-                        })
-                    })
+                frames: iMap({
+                    data: iList([[5, 2], [7]])
                 })
             }
 
@@ -76,7 +225,7 @@ describe('selectors: ', () => {
             expect(actual).toEqual(expected)
         })
 
-        it('first 2 players, 2 frames', () => {
+        xit('first 2 players, 2 frames', () => {
 
             const expected = {
                 '1': [[2, 3], [1, 8]],

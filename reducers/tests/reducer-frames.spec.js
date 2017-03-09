@@ -1,4 +1,4 @@
-import { Map, List, fromJS } from 'immutable'
+import { Map as iMap, List as iList, fromJS } from 'immutable'
 import * as matchers from 'jasmine-immutable-matchers'
 import frames from '../reducer-frames'
 import { GAME_INIT, GAME_START_FRAME, START_NEW_GAME, GAME_THROW_BALL_SUCCESS } from '../../actions/constants'
@@ -7,40 +7,40 @@ describe('Reducer - frames', () => {
     beforeEach(() => jasmine.addMatchers(matchers))
 
     it('should return the initial state', () => {
-        const expected = {
+        const expected = iMap({
             currentFrame: null,
             currentRoll: null,
-            data: {}
-        }
+            data: iList([])
+        })
 
         const actual = frames(undefined, {})
-        expect(actual.toJS()).toEqual(expected)
+        expect(actual).toEqualImmutable(expected)
     })
     it('should handle GAME_INIT', () => {
-        const expected = {
+        const expected = iMap({
             currentFrame: 1,
             currentRoll: 1,
-            data: {}
-        }
+            data: iList([])
+        })
 
         const action = {
             type: GAME_INIT
         }
 
         const actual = frames(undefined, action)
-        expect(actual.toJS()).toEqual(expected)
+        expect(actual).toEqualImmutable(expected)
     })
     it('should handle GAME_START_FRAME', () => {
-        const expected = {
+        const expected = iMap({
             currentFrame: 6,
             currentRoll: 1,
-            data: {}
-        }
+            data: iList([])
+        })
 
-        const state = Map({
+        const state = iMap({
             currentFrame: 5,
             currentRoll: 2,
-            data: {}
+            data: iList([])
         })
 
         const action = {
@@ -49,15 +49,15 @@ describe('Reducer - frames', () => {
         }
 
         const actual = frames(state, action)
-        expect(actual.toJS()).toEqual(expected)
+        expect(actual).toEqualImmutable(expected)
     })
 
     it('handle THROW BALL SUCCESS for first roll', () => {
 
-        const state = Map({
+        const state = iMap({
             currentFrame: null,
             currentRoll: null,
-            data: Map({ '1': List([])})
+            data: iList([])
         })
 
         const action = {
@@ -71,15 +71,13 @@ describe('Reducer - frames', () => {
         const expected = fromJS({
             currentFrame: null,
             currentRoll: null,
-            data: {
-                '1': [
+            data: [
                     {
                         frameId: 1,
                         rollId: 1,
                         score: 4
                     }
-                ]
-            }
+            ]
         })
 
         const actual = frames(state, action)
@@ -88,18 +86,16 @@ describe('Reducer - frames', () => {
     })
 
     it('handle THROW BALL SUCCESS for second roll', () => {
-        const state = Map({
+        const state = iMap({
             currentFrame: null,
             currentRoll: null,
-            data: Map({
-                '5': List([Map(
-                    {
+            data: iList([
+                    iMap({
                         frameId: 1,
                         rollId: 1,
                         score: 4
                     })
-                ])
-            })
+            ])
         })
 
         const action = {
@@ -110,23 +106,21 @@ describe('Reducer - frames', () => {
             score: 2
         }
 
-        const expected = Map({
+        const expected = iMap({
             currentFrame: null,
             currentRoll: null,
-            data: Map({
-                '5': List([
-                    Map({
+            data: iList([
+                    iMap({
                         frameId: 1,
                         rollId: 1,
                         score: 4
                     }),
-                    Map({
+                    iMap({
                         frameId: 3,
                         rollId: 2,
                         score: 2
                     })
-                ])
-            })
+            ])
         })
 
         const actual = frames(state, action)
