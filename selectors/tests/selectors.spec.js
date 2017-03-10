@@ -50,58 +50,84 @@ describe('selectors: ', () => {
 
     describe('currentScore returns score data for ', () => {
 
-        xit('empty set', () => {
+        it('empty set', () => {
 
             const expected = [
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
                 }
             ]
 
-            const state = {
-                frames: iMap({
-                    data: iList([])
-                })
-            }
+            const state = []
 
-            const actual = currentScoreSelector(state)
+            const actual = currentScoreSelector.resultFunc(state)
             expect(actual).toEqual(expected)
         })
 
