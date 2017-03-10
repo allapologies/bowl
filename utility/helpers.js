@@ -18,10 +18,11 @@ export const getMax = (data, currentFrame, currentRoll) => {
 
 export const getNextFrameId = (frame) => frame + 1
 
-export const getNext = (currentFrame, currentRoll, score) => {
+export const getNext = (currentFrame, currentRoll, score, currentPlayer) => {
 
     let nextRoll
     let nextFrame
+    const nextPlayer = currentPlayer
 
     if (currentRoll === FIRST_ROLL) {
         if (score < TOTAL_PINS) {
@@ -40,6 +41,7 @@ export const getNext = (currentFrame, currentRoll, score) => {
 
     return {
         nextRoll,
-        nextFrame
+        nextFrame,
+        nextPlayer
     }
 }

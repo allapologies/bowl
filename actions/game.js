@@ -1,17 +1,17 @@
 import { playersSelector, currentPlayerSelector, currentFrameAndRollSelector, framesDataSelector } from '../selectors'
 import { getRandomInt, getNext, getMax } from '../utility/helpers'
 
-import * as actions from './constants'
+import * as constants from './constants'
 
 export function initGame () {
     return {
-        type: actions.GAME_INIT
+        type: constants.GAME_INIT
     }
 }
 
 export function finishGame () {
     return {
-        type: actions.GAME_FINISH
+        type: constants.GAME_FINISH
     }
 }
 
@@ -22,14 +22,14 @@ export const startGame = () => (dispatch, getState) => {
     const currentPlayer = players[0].id
 
     dispatch({
-        type: actions.START_NEW_GAME, players, player: currentPlayer
+        type: constants.START_NEW_GAME, players, player: currentPlayer
     })
 }
 
-export const replayGame = () => ({ type: actions.REPLAY_GAME })
+export const replayGame = () => ({ type: constants.REPLAY_GAME })
 
 export const throwBall = () => (dispatch, getState) => {
-    dispatch({ type: actions.GAME_THROW_BALL })
+    dispatch({ type: constants.GAME_THROW_BALL })
 
     const state = getState()
     const currentPlayer = currentPlayerSelector(state)
@@ -40,17 +40,20 @@ export const throwBall = () => (dispatch, getState) => {
     const score = getRandomInt(0, max)
 
     dispatch({
-        type: actions.GAME_THROW_BALL_SUCCESS,
+        type: constants.GAME_THROW_BALL_SUCCESS,
         score,
         frameId: currentFrame,
         rollId: currentRoll,
         playerId: currentPlayer,
     })
 
-    const nextState = getNext(currentFrame, currentRoll, score)
+    if (currentFrame === constants.FRAMES_COUNT && currentRoll === constants.SECOND_ROLL) {
+        dispatch(finishGame())
+    }
+    const nextState = getNext(currentFrame, currentRoll, score, currentPlayer)
 
     dispatch({
-        type: actions.GAME_START_ROLL,
+        type: constants.GAME_START_ROLL,
         ...nextState
     })
 
