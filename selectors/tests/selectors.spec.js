@@ -281,6 +281,197 @@ describe('selectors: ', () => {
             const actual = currentScoreSelector.resultFunc(state)
             expect(actual).toEqual(expected)
         })
+        it('first roll of second frame', () => {
+
+            const expected = [
+                {
+                    firstRoll: 5,
+                    secondRoll: 4,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 9
+                },
+                {
+                    firstRoll: 1,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 10
+                }
+            ]
+
+            const state = [{
+                    frameId: 1,
+                    rollId: 1,
+                    score: 5
+                },
+                {
+                    frameId: 1,
+                    rollId: 2,
+                    score: 4
+                },
+                {
+                    frameId: 2,
+                    rollId: 1,
+                    score: 1
+                }
+            ]
+
+            const actual = currentScoreSelector.resultFunc(state)
+            expect(actual).toEqual(expected)
+        })
+        it('spare in first frame', () => {
+
+            const expected = [
+                {
+                    firstRoll: 5,
+                    secondRoll: 5,
+                    isStrike: false,
+                    isSpare: true,
+                    totalScore: 11
+                },
+                {
+                    firstRoll: 1,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 12
+                }
+            ]
+
+            const state = [{
+                    frameId: 1,
+                    rollId: 1,
+                    score: 5
+                },
+                {
+                    frameId: 1,
+                    rollId: 2,
+                    score: 5
+                },
+                {
+                    frameId: 2,
+                    rollId: 1,
+                    score: 1
+                }
+            ]
+
+            const actual = currentScoreSelector.resultFunc(state)
+            expect(actual).toEqual(expected)
+        })
 
 
 
