@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import Immutable from 'immutable'
-import {createSelector, createSelectorCreator, defaultMemoize} from 'reselect'
-
-const FRAMES_COUNT = 10
+import { createSelector, createSelectorCreator, defaultMemoize } from 'reselect'
+import { FRAMES_COUNT } from '../actions/constants'
 
 const createImmutableSelector = createSelectorCreator(defaultMemoize, Immutable.is)
 
@@ -20,12 +19,15 @@ export const currentScoreSelector = createSelector(
     [framesDataSelector],
     (data) => {
         let score = new Array(FRAMES_COUNT)
-        _.fill(score, { firstRoll: null, secondRoll: null })
+        score = _.map(score, () => ({ firstRoll: null, secondRoll: null }))
 
-        _.forEach(data, (item, index) => {
-            score[item.frameId].firstRoll = item.score
-            score[item.frameId].secondRoll = item.score
-        })
+        if (!_.isEmpty(data)) {
+            _.forEach(data, (item) => {
+                const frame = item.frameId - 1
+                const roll = item.rollId === 1 ? 'firstRoll' : 'secondRoll'
+                score[frame][roll] = item.score
+            })
+        }
 
         return score
     }
@@ -62,6 +64,6 @@ export const getCurrentPlayerMeta = createImmutableSelector(
             players,
             (player) => player.id === currentPlayer
         )
-        return {name: data.name, id: data.id}
+        return { name: data.name, id: data.id }
     }
 )
