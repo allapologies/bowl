@@ -38,7 +38,6 @@ export const currentScoreSelector = createSelector(
         _.forEach(score, (frame, index) => {
             score[index].isStrike = frame.firstRoll === TOTAL_PINS
             score[index].isSpare = (frame.firstRoll + frame.secondRoll) === TOTAL_PINS
-
             score[index].totalScore = score[index].firstRoll + score[index].secondRoll
 
             if (index > 0) {
