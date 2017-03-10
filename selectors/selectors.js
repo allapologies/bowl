@@ -89,10 +89,6 @@ export const currentPlayerSelector = createImmutableSelector(
 export const getCurrentPlayerMeta = createImmutableSelector(
     [playersSelector, currentPlayerSelector],
     (players, currentPlayer) => {
-        const data = _.find(
-            players,
-            (player) => player.id === currentPlayer
-        )
-        return { name: data.name, id: data.id }
+        return { name: "wat", id: "wot" }
     }
 )

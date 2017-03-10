@@ -11,24 +11,21 @@ import { ScoreBoardRow } from './scoreboard-row'
 export class ScoreboardBody extends React.Component {
     static propTypes = {
         players: PropTypes.arrayOf(React.PropTypes.object),
-        score: PropTypes.object
+        score: PropTypes.array
     }
 
     render () {
-
-
         return (
             <tbody>
                 {_.map(this.props.players, (player, index) => {
                     const { score } = this.props
-                    const playerScore = score[player.id]
-                    const total = Math.random() * index
+                    const total = score[9].totalScore
 
                     return (
                       <ScoreBoardRow
                         key={index}
                         player={player}
-                        score={playerScore}
+                        score={score}
                         total={total}
                       />
                     )
