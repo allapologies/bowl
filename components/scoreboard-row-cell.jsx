@@ -1,14 +1,25 @@
 import React, { PropTypes } from 'react'
 
 export const Cell = (props) => (
-  <td>
-      <span>{props.roll.score}</span>
-  </td>
+    <div>
+        <span>
+            {props.firstRoll}
+        </span>
+        |
+        <span>
+            {props.secondRoll}
+        </span>
+
+        <span>{props.isStrike ? 'X' : null }</span>
+        <span>{props.isSpare ? '/' : null }</span>
+        <span><span>ttl: </span>{props.total }</span>
+    </div>
 )
 
 Cell.propTypes = {
-    roll: PropTypes.shape({
-        rollId: PropTypes.number,
-        score: PropTypes.number
-    })
+    firstRoll: PropTypes.number,
+    secondRoll: PropTypes.number,
+    isStrike: PropTypes.bool,
+    isSpare: PropTypes.bool,
+    total: PropTypes.number
 }

@@ -16,7 +16,7 @@ export class ScoreboardBody extends React.Component {
 
     render () {
         return (
-            <tbody>
+            <div>
                 {_.map(this.props.players, (player, index) => {
                     const { score } = this.props
                     const total = score[9].totalScore
@@ -30,7 +30,7 @@ export class ScoreboardBody extends React.Component {
                       />
                     )
                 })}
-            </tbody>
+            </div>
         )
     }
 }

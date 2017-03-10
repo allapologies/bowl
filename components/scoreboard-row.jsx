@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
+import { Cell } from './scoreboard-row-cell'
+
 import { FRAMES_COUNT } from '../actions/constants'
 
 export const ScoreBoardRow = (props) => {
@@ -8,31 +10,25 @@ export const ScoreBoardRow = (props) => {
     const { player, score, total } = props
 
     return (
-        <tr>
-          <td>
-              {player.name}
-          </td>
-          {_.map(new Array(FRAMES_COUNT), (roll, index) => {
-              return (
-                <td key={index}>
-                    <span>
-                        {score[index].firstRoll}
-                    </span>
-                    |
-                    <span>
-                        {score[index].secondRoll}
-                    </span>
-
-                    <span>{score[index].isStrike ? 'X' : null }</span>
-                    <span>{score[index].isSpare ? '/' : null }</span>
-                    <span><span>ttl: </span>{score[index].totalScore }</span>
-                </td>
-              )
-          })}
-          <td>
-              {total}
-          </td>
-        </tr>
+        <div>
+            <div>
+                {player.name}
+            </div>
+            {_.map(new Array(FRAMES_COUNT), (roll, index) => (
+                    <Cell
+                        key={index}
+                        firstRoll={score[index].firstRoll}
+                        secondRoll={score[index].secondRoll}
+                        isStrike={score[index].isStrike}
+                        isSpare={score[index].isSpare}
+                        total={score[index].totalScore}
+                    />
+                )
+            )}
+            <td>
+            {total}
+            </td>
+        </div>
     )
 }
 
