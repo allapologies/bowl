@@ -1,84 +1,45 @@
 import _ from 'lodash'
 
+import { TOTAL_PINS, FIRST_ROLL, SECOND_ROLL } from '../actions/constants'
+
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-export const getMax = (frameData = {}) => {
-    let max = 10
-    _.forIn(frameData, (val) => max -= val)
-    return max
-}
-
-const getPlayerIndex = (currentPlayerId, players) => {
-    return _.findIndex(players, (player) => {
-        return player.id == currentPlayerId
-    })
-}
-
-export const getNextPlayerId = (currentPlayerId, players) => {
-    const index = getPlayerIndex(currentPlayerId, players)
-    if (players[index + 1]) {
-        return { id: players[index + 1].id, index: index + 1 }
-    } else {
-        return { id: players[0].id, index: 0 }
+export const getMax = (data, currentFrame, currentRoll) => {
+    let max = TOTAL_PINS
+    if (currentRoll === FIRST_ROLL) {
+        return max
     }
+
+    const firstRoll = _.find(data, { frameId: currentFrame, rollId: FIRST_ROLL })
+    max -= firstRoll.score
+
+    return max
 }
 
 export const getNextFrameId = (frame) => frame + 1
 
-export const getNext = (currentPlayer, players, currentFrame, currentRoll, score, data) => {
+export const getNext = (currentFrame, currentRoll, score) => {
 
     let nextRoll
-    let nextPlayer
     let nextFrame
-    if (currentFrame === 10 && currentRoll === 2) {
-        if (getMax(data[currentPlayer][currentFrame]) === 10) {
-            nextRoll = 3
-            nextPlayer = currentPlayer
-            nextFrame = 10
-        }
-    }
 
-    if (currentRoll === 1) {
-        if (score < 10) {
-            nextRoll = 2
-            nextPlayer = currentPlayer
+    if (currentRoll === FIRST_ROLL) {
+        if (score < TOTAL_PINS) {
+            nextRoll = SECOND_ROLL
             nextFrame = currentFrame
         } else {
-            nextRoll = 1
-            const nextPlayerData = getNextPlayerId(currentPlayer, players)
-            nextPlayer = nextPlayerData.id
-            nextFrame = (nextPlayerData.index === 0) ? getNextFrameId(currentFrame) : currentFrame
+            nextRoll = FIRST_ROLL
+            nextFrame = getNextFrameId(currentFrame)
         }
     }
 
-    if (currentRoll === 2) {
-        nextRoll = 1
-        const nextPlayerData = getNextPlayerId(currentPlayer, players)
-        nextPlayer = nextPlayerData.id
-        nextFrame = (nextPlayerData.index === players.length - 1) ? currentFrame : getNextFrameId(currentFrame)
+    if (currentRoll === SECOND_ROLL) {
+        nextRoll = FIRST_ROLL
+        nextFrame = getNextFrameId(currentFrame)
     }
 
     return {
         nextRoll,
-        nextPlayer,
         nextFrame
     }
-}
-
-export const isLastPlayer = (currentPlayer, players) => {
-    return getPlayerIndex(currentPlayer, players) === players.length - 1
-}
-
-export const isLastRoll = (currentFrame, currentRoll, data) => {
-    if (currentFrame !== 10) {
-        return false
-    } else if (currentRoll === 1) {
-        return false
-    }
-
-    if (currentRoll === 3) {
-        return true
-    }
-
-    return getMax(data[currentFrame]) !== 0
 }

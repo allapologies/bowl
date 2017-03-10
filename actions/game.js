@@ -1,7 +1,7 @@
-import * as actions from './constants'
-
-import { getRandomInt, getNext, getMax, isLastPlayer, isLastRoll } from '../utility/helpers'
 import { playersSelector, currentPlayerSelector, currentFrameAndRollSelector, framesDataSelector } from '../selectors'
+import { getRandomInt, getNext, getMax } from '../utility/helpers'
+
+import * as actions from './constants'
 
 export function initGame () {
     return {
@@ -32,12 +32,11 @@ export const throwBall = () => (dispatch, getState) => {
     dispatch({ type: actions.GAME_THROW_BALL })
 
     const state = getState()
-    const players = playersSelector(state)
     const currentPlayer = currentPlayerSelector(state)
     const { currentFrame, currentRoll } = currentFrameAndRollSelector(state)
     const data = framesDataSelector(state)
 
-    const max = getMax(data[currentPlayer][currentFrame])
+    const max = getMax(data, currentFrame, currentRoll)
     const score = getRandomInt(0, max)
 
     dispatch({
@@ -48,12 +47,7 @@ export const throwBall = () => (dispatch, getState) => {
         playerId: currentPlayer,
     })
 
-    if (isLastPlayer(currentPlayer, players)
-        && isLastRoll(currentFrame, currentRoll, data[currentPlayer])) {
-        return dispatch(finishGame())
-    }
-
-    const nextState = getNext(currentPlayer, players, currentFrame, currentRoll, score, data)
+    const nextState = getNext(currentFrame, currentRoll, score)
 
     dispatch({
         type: actions.GAME_START_ROLL,
