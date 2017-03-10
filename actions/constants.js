@@ -15,3 +15,4 @@ export const GAME_THROW_BALL = 'GAME_THROW_BALL'
 export const GAME_THROW_BALL_SUCCESS = 'GAME_THROW_BALL_SUCCESS'
 
 export const FRAMES_COUNT = 10
+export const TOTAL_PINS = 10

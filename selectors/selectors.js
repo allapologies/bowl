@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import Immutable from 'immutable'
 import { createSelector, createSelectorCreator, defaultMemoize } from 'reselect'
-import { FRAMES_COUNT } from '../actions/constants'
+import { FRAMES_COUNT, TOTAL_PINS } from '../actions/constants'
 
 const createImmutableSelector = createSelectorCreator(defaultMemoize, Immutable.is)
 
@@ -19,7 +19,13 @@ export const currentScoreSelector = createSelector(
     [framesDataSelector],
     (data) => {
         let score = new Array(FRAMES_COUNT)
-        score = _.map(score, () => ({ firstRoll: null, secondRoll: null }))
+        score = _.map(score, () => ({
+            firstRoll: null,
+            secondRoll: null,
+            isStrike: false,
+            isSpare: false,
+            totalScore: null
+        }))
 
         if (!_.isEmpty(data)) {
             _.forEach(data, (item) => {
@@ -28,6 +34,25 @@ export const currentScoreSelector = createSelector(
                 score[frame][roll] = item.score
             })
         }
+
+        _.forEach(score, (frame, index) => {
+            score[index].isStrike = frame.firstRoll === TOTAL_PINS
+            score[index].isSpare = (frame.firstRoll + frame.secondRoll) === TOTAL_PINS
+
+            score[index].totalScore = score[index].firstRoll + score[index].secondRoll
+
+            if (index > 0) {
+                score[index].totalScore += score[index - 1].totalScore
+            }
+
+            if (score[index].isSpare && score[index + 1].firstRoll !== null) {
+                score[index].totalScore += score[index + 1].firstRoll
+            }
+
+            if (score[index].isStrike && score[index + 1].firstRoll !== null && score[index + 1].secondRoll !== null) {
+                score[index].totalScore = score[index].totalScore + score[index + 1].firstRoll + score[index + 1].secondRoll
+            }
+        })
 
         return score
     }

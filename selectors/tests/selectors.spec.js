@@ -110,43 +110,74 @@ describe('selectors: ', () => {
             const expected = [
                 {
                     firstRoll: 3,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
+
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 },
                 {
                     firstRoll: null,
-                    secondRoll: null
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: 3
                 }
             ]
 
