@@ -10,8 +10,8 @@ export const ScoreBoardRow = (props) => {
     const { player, score, total } = props
 
     return (
-        <div>
-            <div>
+        <div className="row">
+            <div className="col">
                 {player.name}
             </div>
             {_.map(new Array(FRAMES_COUNT), (roll, index) => (
@@ -25,9 +25,9 @@ export const ScoreBoardRow = (props) => {
                     />
                 )
             )}
-            <td>
-            {total}
-            </td>
+            <div className="col">
+                {total}
+            </div>
         </div>
     )
 }

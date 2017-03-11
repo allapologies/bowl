@@ -1,16 +1,23 @@
 import React from 'react'
 import _ from 'lodash'
 
+import { FRAMES_COUNT } from '../actions/constants'
+
 export const ScoreBoardHead = () => {
-    const head = new Array(10)
+    const head = new Array(FRAMES_COUNT)
 
     return (
-      <div>
-          <div>
-              <div>Player</div>
-              {_.map(head, (id, key) =><div key={key + 1}>{ key + 1}</div>)}
-              <td>Total</td>
-          </div>
-      </div>
+        <div className="row">
+            <div className="col">Player</div>
+            {_.map(head, (id, key) => (
+                <div
+                    key={key + 1}
+                    className="col"
+                >
+                    { key + 1}
+                </div>
+            ))}
+            <div className="col">Total</div>
+        </div>
     )
 }

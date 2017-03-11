@@ -17,7 +17,7 @@ export class App extends React.Component {
     render () {
         const { step } = this.props
         return (
-          <div className={classnames("container", 'app')}>
+          <div className={classnames("container")}>
               <h3> Bowling scoring system </h3>
               { step === 1 && <Players /> }
               { step === 2 && <Game /> }
