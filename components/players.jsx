@@ -1,6 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 import * as actions from '../actions'
 import { playersSelector } from '../selectors'
 
@@ -48,7 +49,7 @@ export class Players extends React.Component {
     }
 
     handleStartClick = () => {
-        if (this.props.players.length < 0) {
+        if (this.props.players.length < 1) {
             return
         }
 
@@ -80,15 +81,33 @@ export class Players extends React.Component {
         return (
           <div>
               <form onSubmit={this.handleSubmit}>
-                  <input
-                    value={this.state.name}
-                    onChange={this.handleInput}
-                    placeholder="player name"
-                  />
-                  <button type="submit">add player</button>
+                  <div className="input-group">
+                      <input
+                        value={this.state.name}
+                        onChange={this.handleInput}
+                        placeholder="player name"
+                        className="form-control"
+                      />
+                      <span className="input-group-btn">
+                          <button
+                            type="submit"
+                            className="btn btn-secondary"
+                          >
+                              add
+                          </button>
+                      </span>
+                  </div>
               </form>
               {this.renderPlayers()}
-              <button type="button" onClick={this.handleStartClick}>start!</button>
+              <button
+                type="button"
+                onClick={this.handleStartClick}
+                className={classnames("btn", "btn-success", {
+                    'disabled': this.props.players.length < 1
+                })}
+              >
+                  start!
+              </button>
           </div>
         )
     }
