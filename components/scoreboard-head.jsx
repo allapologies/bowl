@@ -7,17 +7,18 @@ export const ScoreBoardHead = () => {
     const head = new Array(FRAMES_COUNT)
 
     return (
-        <div className="row">
-            <div className="col">Player</div>
+      <tbody>
+        <tr>
+            <th>Player</th>
             {_.map(head, (id, key) => (
-                <div
+                <th
                     key={key + 1}
-                    className="col"
                 >
                     { key + 1}
-                </div>
+                </th>
             ))}
-            <div className="col">Total</div>
-        </div>
+            <th>Total</th>
+        </tr>
+      </tbody>
     )
 }

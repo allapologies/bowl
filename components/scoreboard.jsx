@@ -3,8 +3,8 @@ import { ScoreBoardHead } from './scoreboard-head'
 import { ScoreboardBody } from './scoreboard-body'
 
 export const ScoreBoard = () => (
-    <div className="scoreboard">
+    <table>
         <ScoreBoardHead />
         <ScoreboardBody />
-    </div>
+    </table>
 )
