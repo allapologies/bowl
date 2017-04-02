@@ -30,22 +30,23 @@
   &_triple {
     width: 75px;
   }
-}
 
-.points {
-  height: 25px;
-
-  &_first, &_second {
-    width: 25px;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  &_second {
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-  }
-  &_total {
+  &_points {
     height: 25px;
-    padding: 0;
+
+    &_first, &_second {
+      width: 25px;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    &_second {
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    &_total {
+      height: 25px;
+      padding: 0;
+    }
   }
 }
+

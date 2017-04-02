@@ -1,35 +1,34 @@
 import React, { PropTypes } from 'react'
-import classnames from 'classnames'
 
 import styles from './scoreboard.css'
 
 const renderThird = (points) => (
-  <td className={styles.points_third}>
-      { points }
-  </td>
+    <td className={styles.points_third}>
+        { points }
+    </td>
 )
 
 export const Cell = (props) => (
-  <td className={styles.cell_td}>
-      <table className={styles.cell}>
-          <tbody>
-          <tr className={styles.points}>
-              <td className={styles.points_first}>
-                  { props.isStrike ? 'X' : props.firstRoll }
-              </td>
-              <td className={styles.points_second}>
-                  { props.isSpare ? '/' : props.secondRoll }
-              </td>
-              {props.hasThird ? renderThird(props.thirdRoll) : null}
-          </tr>
-          <tr className={styles.points}>
-              <td className={styles.points_total}>
-                  { props.total }
-              </td>
-          </tr>
-          </tbody>
-      </table>
-  </td>
+    <td className={styles.cell}>
+        <table className={styles.cellTable}>
+            <tbody>
+                <tr className={styles.cell_points_row}>
+                    <td className={styles.cell_points_first}>
+                        { props.isStrike ? 'X' : props.firstRoll }
+                    </td>
+                    <td className={styles.cell_points_second}>
+                        { props.isSpare ? '/' : props.secondRoll }
+                    </td>
+                    {props.hasThird ? renderThird(props.thirdRoll) : null}
+                </tr>
+                <tr className={styles.cell_points_row}>
+                    <td className={styles.points_total}>
+                        { props.total }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
 )
 
 Cell.propTypes = {
