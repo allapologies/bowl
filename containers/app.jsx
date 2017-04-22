@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import classnames from 'classnames'
+import { stepSelector } from '../selectors'
 import { Players, Game, Results } from '../components'
 
-require("./styles/styles.css");
-
 @connect((state) => ({
-    step: state.steps.step,
+    step: stepSelector(state),
 }))
 export class App extends React.Component {
 
@@ -17,7 +15,7 @@ export class App extends React.Component {
     render () {
         const { step } = this.props
         return (
-          <div className={classnames("container")}>
+          <div className="container">
               <h3> Bowling scoring system </h3>
               { step === 1 && <Players /> }
               { step === 2 && <Game /> }

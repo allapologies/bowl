@@ -6,6 +6,8 @@ import { FRAMES_COUNT, TOTAL_PINS } from '../actions/constants'
 
 const createImmutableSelector = createSelectorCreator(defaultMemoize, Immutable.is)
 
+export const stepSelector = (state) => state.steps.step
+
 export const getFramesSlice = createSelector(
     (state) => state.frames,
     (frames) => frames
