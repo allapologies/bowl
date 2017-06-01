@@ -5,7 +5,8 @@ import * as actions from '../actions/constants'
 const INITIAL_STATE = iMap({
     currentFrame: null,
     currentRoll: null,
-    data: iList([])
+    data: iList([]),
+    isFinished: false
 })
 
 export default function (state = INITIAL_STATE, action) {
@@ -35,6 +36,9 @@ export default function (state = INITIAL_STATE, action) {
             return state
                 .setIn(['currentFrame'], 1)
                 .setIn(['currentRoll'], 1)
+        case actions.GAME_FINISH:
+            return state
+                .set('isFinished', true)
         default:
             return state
     }

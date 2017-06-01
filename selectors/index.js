@@ -1,5 +1,5 @@
 export { getFramesSlice, getPlayersSlice,
     playersSelector, currentPlayerSelector, currentFrameAndRollSelector,
     getCurrentPlayerMeta, framesDataSelector, currentScoreSelector,
-    stepSelector
+    stepSelector, getIsFinished
 } from './selectors'

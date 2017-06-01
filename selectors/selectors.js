@@ -98,3 +98,8 @@ export const getCurrentPlayerMeta = createImmutableSelector(
         return { name: data.name, id: data.id }
     }
 )
+
+export const getIsFinished = createImmutableSelector(
+  [getFramesSlice],
+    (framesSlice) => framesSlice.get('isFinished')
+)

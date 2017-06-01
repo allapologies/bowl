@@ -1,4 +1,6 @@
-import { playersSelector, currentPlayerSelector, currentFrameAndRollSelector, framesDataSelector } from '../selectors'
+import { playersSelector, currentPlayerSelector,
+  currentFrameAndRollSelector, framesDataSelector,
+ getIsFinished } from '../selectors'
 import { getRandomInt, getNext, getMax } from '../utility/helpers'
 
 import * as constants from './constants'
@@ -29,9 +31,13 @@ export const startGame = () => (dispatch, getState) => {
 export const replayGame = () => ({ type: constants.REPLAY_GAME })
 
 export const throwBall = () => (dispatch, getState) => {
+    const state = getState()
+    if (getIsFinished(state)) {
+        return void 0
+    }
+
     dispatch({ type: constants.GAME_THROW_BALL })
 
-    const state = getState()
     const currentPlayer = currentPlayerSelector(state)
     const { currentFrame, currentRoll } = currentFrameAndRollSelector(state)
     const data = framesDataSelector(state)
@@ -48,11 +54,11 @@ export const throwBall = () => (dispatch, getState) => {
     })
 
     if (currentFrame === constants.FRAMES_COUNT && currentRoll === constants.SECOND_ROLL) {
-        dispatch(finishGame())
+        return dispatch(finishGame())
     }
     const nextState = getNext(currentFrame, currentRoll, score, currentPlayer)
 
-    dispatch({
+    return dispatch({
         type: constants.GAME_START_ROLL,
         ...nextState
     })
