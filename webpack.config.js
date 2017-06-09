@@ -10,24 +10,33 @@ module.exports = {
         filename  : 'bundle.js'
     },
     module : {
-        loaders: [
+        rules: [
             {
                 test   : /\.jsx?$/,
-                loader : 'babel',
+                loader : 'babel-loader',
                 exclude: /node_modules/
             },
             {
                 test  : /\.css$/,
-                loaders:  [
-                  "style-loader",
-                    "css-loader?modules&importLoaders=1",
-                    "postcss-loader"
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: 'css-loader',
+                        query: {
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: "postcss-loader"
+                    }
                 ]
             }
         ]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     devServer: {
         inline: true,
