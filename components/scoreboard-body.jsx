@@ -14,6 +14,10 @@ export class ScoreboardBody extends React.Component {
         score: PropTypes.object
     }
 
+    static defaultPropes = {
+        score: {}
+    }
+
     render () {
 
 
