@@ -10,7 +10,8 @@ describe('Reducer - frames', () => {
         const expected = iMap({
             currentFrame: null,
             currentRoll: null,
-            data: iList([])
+            data: iList([]),
+            isFinished: false
         })
 
         const actual = frames(undefined, {})
@@ -20,7 +21,8 @@ describe('Reducer - frames', () => {
         const expected = iMap({
             currentFrame: 1,
             currentRoll: 1,
-            data: iList([])
+            data: iList([]),
+            isFinished: false
         })
 
         const action = {
