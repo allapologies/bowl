@@ -48,7 +48,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --content-base build/ --hot",
-    "test:watch": "node node_modules/karma/bin/karma start --browsers Chrome karma.config.js"
+    "test:watch": "node node_modules/karma/bin/karma start --browsers Chrome karma.config.js",
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
