@@ -17,7 +17,7 @@ export const ScoreBoardRow = (props) => {
             </td>
             {_.map(rollsArray, (roll, index) => {
 
-                const { firstRoll, secondRoll, thirdRoll, isSpare, isStrike, totalScore } = score
+                const { firstRoll, secondRoll, thirdRoll, isSpare, isStrike, totalScore } = score[index]
 
                 return (
                     <Cell
