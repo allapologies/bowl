@@ -2,13 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import { ScoreBoard } from './scoreboard'
+import { PinsSelection } from './pins'
 import { getCurrentPlayerMeta, getIsFinished } from '../selectors'
 
 @connect((state) => ({
     currentPlayer: getCurrentPlayerMeta(state),
     isFinished: getIsFinished(state)
 }), (dispatch) => ({
-    throwBall: () => dispatch(actions.throwBall())
+    throwBall: (pins) => dispatch(actions.throwBall(pins))
 }))
 export class Game extends React.Component {
 
@@ -21,18 +22,14 @@ export class Game extends React.Component {
         isFinished: React.PropTypes.bool
     }
 
-    handleClick = () => this.props.throwBall()
-
-    render () {
-        const { currentPlayer, isFinished } = this.props
+    render() {
+        const { currentPlayer, isFinished, throwBall } = this.props
         return (
-          <div>
-              <h3>{currentPlayer.name}</h3>
-              <button type='button' onClick={this.handleClick} disabled={isFinished}>
-                throw!
-              </button>
-              <ScoreBoard />
-          </div>
+            <div>
+                <h3>{currentPlayer.name}</h3>
+                <PinsSelection onSelect={throwBall} maxValue={10} isHidden={isFinished}/>
+                <ScoreBoard />
+            </div>
         )
     }
 }
