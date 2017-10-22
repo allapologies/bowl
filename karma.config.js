@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const webpack = require('webpack')
-const path = require('path')
+const webpackConfig = require('./webpack.config')
 
 module.exports = function (config) {
     'use strict'
@@ -30,31 +30,7 @@ module.exports = function (config) {
             './**/tests/**/*.spec.js': ['webpack']
         },
 
-        webpack: {
-            module: {
-                loaders: [
-                    {
-                        test: /\.jsx?$/,
-                        exclude: [/node_modules/, /\.spec\.jsx?$/],
-                        loaders: ['babel-loader']
-                    },
-                    {
-                        test: /\.spec\.jsx?$/,
-                        exclude: /node_modules/,
-                        loaders: ['babel-loader']
-                    }
-                ]
-            },
-
-            resolve: {
-                extensions: ['', '.jsx', '.js', '.json']
-            },
-            plugins: [
-                new webpack.DefinePlugin({
-                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-                })
-            ]
-        },
+        webpack: webpackConfig,
 
         webpackMiddleware: {
             noInfo: true
