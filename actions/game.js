@@ -30,7 +30,7 @@ export const startGame = () => (dispatch, getState) => {
 
 export const replayGame = () => ({ type: constants.REPLAY_GAME })
 
-export const throwBall = () => (dispatch, getState) => {
+export const throwBall = (score) => (dispatch, getState) => {
     const state = getState()
     if (getIsFinished(state)) {
         return void 0
@@ -40,10 +40,6 @@ export const throwBall = () => (dispatch, getState) => {
 
     const currentPlayer = currentPlayerSelector(state)
     const { currentFrame, currentRoll } = currentFrameAndRollSelector(state)
-    const data = framesDataSelector(state)
-
-    const max = getMax(data, currentFrame, currentRoll)
-    const score = getRandomInt(0, max)
 
     dispatch({
         type: constants.GAME_THROW_BALL_SUCCESS,
