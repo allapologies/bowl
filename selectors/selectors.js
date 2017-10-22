@@ -2,7 +2,7 @@ import _ from 'lodash'
 import Immutable from 'immutable'
 import { createSelector, createSelectorCreator, defaultMemoize } from 'reselect'
 
-import { FRAMES_COUNT, TOTAL_PINS } from '../actions/constants'
+import { FRAMES_COUNT, TOTAL_PINS, FIRST_ROLL, SECOND_ROLL } from '../actions/constants'
 
 const createImmutableSelector = createSelectorCreator(defaultMemoize, Immutable.is)
 
@@ -69,7 +69,7 @@ export const currentFrameAndRollSelector = createSelector(
     (framesSlice) => {
         const currentFrame = framesSlice.get('currentFrame')
         const currentRoll = framesSlice.get('currentRoll')
-        return {currentFrame, currentRoll}
+        return { currentFrame, currentRoll }
     }
 )
 
@@ -100,6 +100,28 @@ export const getCurrentPlayerMeta = createImmutableSelector(
 )
 
 export const getIsFinished = createImmutableSelector(
-  [getFramesSlice],
+    [getFramesSlice],
     (framesSlice) => framesSlice.get('isFinished')
+)
+
+const getScoreByFrameIdAndRollId = (frameId, rollId, data) => {
+    const result = _.find(data, { frameId, rollId } )
+    return TOTAL_PINS - result.score
+}
+
+export const getAvailablePins = createImmutableSelector(
+    [getFramesSlice, framesDataSelector],
+    (framesSlice, data) => {
+        const currentRoll = framesSlice.get('currentRoll')
+        const currentFrame = framesSlice.get('currentFrame')
+
+        switch (currentRoll) {
+            case FIRST_ROLL:
+                return TOTAL_PINS
+            case SECOND_ROLL:
+                return getScoreByFrameIdAndRollId(currentFrame, FIRST_ROLL, data)
+            default:
+                return TOTAL_PINS
+        }
+    }
 )
