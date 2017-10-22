@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { playersSelector, currentScoreSelector } from '../selectors'
+import { playersSelector, currentScoreSelector } from '../../selectors'
 import { ScoreBoardRow } from './scoreboard-row'
 
 @connect((state) => ({

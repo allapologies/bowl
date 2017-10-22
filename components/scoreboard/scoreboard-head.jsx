@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { FRAMES_COUNT } from '../actions/constants'
+import { FRAMES_COUNT } from '../../actions/constants'
 
 export const ScoreBoardHead = () => {
     const head = new Array(FRAMES_COUNT)
