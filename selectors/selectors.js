@@ -105,7 +105,7 @@ export const getIsFinished = createImmutableSelector(
 )
 
 const getScoreByFrameIdAndRollId = (frameId, rollId, data) => {
-    const result = _.find(data, { frameId, rollId } )
+    const result = _.find(data, { frameId, rollId })
     return TOTAL_PINS - result.score
 }
 
@@ -124,4 +124,12 @@ export const getAvailablePins = createImmutableSelector(
                 return TOTAL_PINS
         }
     }
+)
+
+export const getScore = createImmutableSelector(
+    [framesDataSelector],
+    (rolls) => _.reduce(rolls, (result, roll) => {
+        result += roll.score
+        return result
+    }, 0)
 )
