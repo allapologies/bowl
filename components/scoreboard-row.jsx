@@ -45,5 +45,9 @@ ScoreBoardRow.propTypes = {
         id: PropTypes.string
     }).isRequired,
     score: PropTypes.array.isRequired,
-    total: PropTypes.number.isRequired
+    total: PropTypes.number
+}
+
+ScoreBoardRow.defaultProps = {
+    total: 0
 }
