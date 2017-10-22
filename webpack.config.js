@@ -1,4 +1,5 @@
 const path = require('path')
+const Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = {
     entry  : {
@@ -42,6 +43,9 @@ module.exports = {
         inline: true,
         hot: true
     },
-    devtool: 'eval'
+    devtool: 'eval',
+    plugins: [
+        new Visualizer()
+    ]
 }
 
