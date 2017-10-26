@@ -11,7 +11,7 @@ module.exports = {
         publicPath: '/assets/',
         filename  : 'bundle.js'
     },
-    module : {
+    module: {
         rules: [
             {
                 test   : /\.jsx?$/,
@@ -38,8 +38,12 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        modules: [
+            'node_modules'
+        ]
     },
+
     devServer: {
         inline: true,
         hot: true
@@ -48,6 +52,14 @@ module.exports = {
     plugins: [
         new Visualizer(),
         new UglifyJSPlugin()
-    ]
+    ],
+    externals: {
+        react: 'react',
+        lodash: 'lodash',
+        immutable: 'immutable',
+        classnames: 'classnames',
+        'redux-thunk': 'redux-thunk',
+        reselect: 'reselect'
+    }
 }
 
