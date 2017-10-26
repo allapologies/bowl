@@ -1,5 +1,6 @@
 const path = require('path')
 const Visualizer = require('webpack-visualizer-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     entry  : {
@@ -45,7 +46,8 @@ module.exports = {
     },
     devtool: 'eval',
     plugins: [
-        new Visualizer()
+        new Visualizer(),
+        new UglifyJSPlugin()
     ]
 }
 
