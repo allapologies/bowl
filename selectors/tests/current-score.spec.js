@@ -93,14 +93,14 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
 
                 },
                 {
@@ -108,56 +108,56 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 3
+                    totalScore: null
                 }
             ]
 
@@ -185,7 +185,7 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
 
                 },
                 {
@@ -193,64 +193,64 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 9
+                    totalScore: null
                 }
             ]
 
             const state = [{
-                    frameId: 1,
-                    rollId: 1,
-                    score: 5
-                },
+                frameId: 1,
+                rollId: 1,
+                score: 5
+            },
                 {
                     frameId: 1,
                     rollId: 2,
@@ -276,7 +276,7 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
 
                 },
                 {
@@ -284,64 +284,64 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 10
+                    totalScore: null
                 }
             ]
 
             const state = [{
-                    frameId: 1,
-                    rollId: 1,
-                    score: 5
-                },
+                frameId: 1,
+                rollId: 1,
+                score: 5
+            },
                 {
                     frameId: 1,
                     rollId: 2,
@@ -357,6 +357,100 @@ describe('selectors: ', () => {
             const actual = currentScoreSelector.resultFunc(state)
             expect(actual).toEqual(expected)
         })
+
+        it('spare in first frame, no next', () => {
+
+            const expected = [
+                {
+                    firstRoll: 5,
+                    secondRoll: 5,
+                    isStrike: false,
+                    isSpare: true,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                },
+                {
+                    firstRoll: null,
+                    secondRoll: null,
+                    isStrike: false,
+                    isSpare: false,
+                    totalScore: null
+                }
+            ]
+
+            const state = [
+                {
+                    frameId: 1,
+                    rollId: 1,
+                    score: 5
+                },
+                {
+                    frameId: 1,
+                    rollId: 2,
+                    score: 5
+                }
+
+            ]
+
+            const actual = currentScoreSelector.resultFunc(state)
+            expect(actual).toEqual(expected)
+        })
+
         it('spare in first frame', () => {
 
             const expected = [
@@ -372,71 +466,71 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 12
+                    totalScore: null
                 }
             ]
 
             const state = [{
-                    frameId: 1,
-                    rollId: 1,
-                    score: 5
-                },
+                frameId: 1,
+                rollId: 1,
+                score: 5
+            },
                 {
                     frameId: 1,
                     rollId: 2,
@@ -474,60 +568,61 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 16
+                    totalScore: null
                 }
             ]
 
-            const state = [{
+            const state = [
+                {
                     frameId: 1,
                     rollId: 1,
                     score: 10
@@ -576,49 +671,49 @@ describe('selectors: ', () => {
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 },
                 {
                     firstRoll: null,
                     secondRoll: null,
                     isStrike: false,
                     isSpare: false,
-                    totalScore: 32
+                    totalScore: null
                 }
             ]
 

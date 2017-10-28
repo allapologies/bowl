@@ -18,6 +18,10 @@ export const framesDataSelector = createImmutableSelector(
     (framesSlice) => framesSlice.get('data').toJS()
 )
 
+const nextRollHasPlayed = (frames, currenFrameIndex) => {
+    return _.get(_.nth(frames, currenFrameIndex + 1), 'firstRoll', null) !== null
+}
+
 export const currentScoreSelector = createSelector(
     [framesDataSelector],
     (data) => {
@@ -45,7 +49,7 @@ export const currentScoreSelector = createSelector(
             }
             score[index].isStrike = frame.firstRoll === TOTAL_PINS
             score[index].isSpare = !score[index].isStrike && (frame.firstRoll + frame.secondRoll) === TOTAL_PINS
-            score[index].totalScore = score[index].firstRoll + score[index].secondRoll
+            score[index].totalScore = nextRollHasPlayed(score, index) ? score[index].firstRoll + score[index].secondRoll : null
 
             if (index > 0) {
                 score[index].totalScore += score[index - 1].totalScore
