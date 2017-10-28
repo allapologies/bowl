@@ -52,14 +52,6 @@ module.exports = {
     plugins: [
         new Visualizer(),
         new UglifyJSPlugin()
-    ],
-    externals: {
-        react: 'react',
-        lodash: 'lodash',
-        immutable: 'immutable',
-        classnames: 'classnames',
-        'redux-thunk': 'redux-thunk',
-        reselect: 'reselect'
-    }
+    ]
 }
 
