@@ -54,5 +54,17 @@ describe('selectors: ', () => {
             expect(actual).toBe(expected)
         })
 
+        it('calculates strike', () => {
+            const data = _.concat(
+                createRolls(10, 1),
+                createRolls(1, 1),
+                createRolls(4, 1)
+            )
+
+            const expected = 20
+            const actual = getScore.resultFunc(data)
+            expect(actual).toBe(expected)
+        })
+
     })
 })
