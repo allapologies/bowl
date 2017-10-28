@@ -126,10 +126,19 @@ export const getAvailablePins = createImmutableSelector(
     }
 )
 
+
+const isSpare = (score1, score2) => score1 + score2 === TOTAL_PINS
+const handleSpare = (score1, score2) => score1 + score2
+
+
 export const getScore = createImmutableSelector(
     [framesDataSelector],
-    (rolls) => _.reduce(rolls, (result, roll) => {
-        result += roll.score
+    (rolls) => _.reduce(rolls, (result, roll, index) => {
+        if (isSpare(roll.score, _.get(_.nth(rolls, index + 1), 'score', 0))) {
+            result += handleSpare(roll.score, _.get(_.nth(rolls, index + 2), 'score', 0))
+        } else {
+            result += roll.score
+        }
         return result
     }, 0)
 )
