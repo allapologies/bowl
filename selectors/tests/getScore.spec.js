@@ -13,10 +13,6 @@ describe('selectors: ', () => {
 
     describe('getScore', () => {
 
-        it('defined', () => {
-            expect(getScore).toBeDefined()
-        })
-
         it('calculates zero rolls', () => {
             const data = []
 
@@ -37,6 +33,16 @@ describe('selectors: ', () => {
             const data = createRolls(4, 20)
 
             const expected = 80
+            const actual = getScore.resultFunc(data)
+            expect(actual).toBe(expected)
+        })
+
+        it('calculates 20 empty rolls', () => {
+            const data = _.concat(
+                createRolls(0, 20)
+            )
+
+            const expected = 0
             const actual = getScore.resultFunc(data)
             expect(actual).toBe(expected)
         })
@@ -62,6 +68,16 @@ describe('selectors: ', () => {
             )
 
             const expected = 20
+            const actual = getScore.resultFunc(data)
+            expect(actual).toBe(expected)
+        })
+
+        it('calculates 10 strikes', () => {
+            const data = _.concat(
+                createRolls(10, 11)
+            )
+
+            const expected = 300
             const actual = getScore.resultFunc(data)
             expect(actual).toBe(expected)
         })
