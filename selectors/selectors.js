@@ -22,9 +22,32 @@ const nextRollHasPlayed = (frames, currenFrameIndex) => {
     return _.get(_.nth(frames, currenFrameIndex + 1), 'firstRoll', null) !== null
 }
 
+
+const zeroToNull = (int) => int == 0 ? null : int
+
+const isSpare = (firstRollScore = 0, secondRollScore = 0) =>
+    firstRollScore + secondRollScore === TOTAL_PINS
+
+
+const isStrike = (firstRollScore, /** secondRollScore = 0 **/) =>
+    firstRollScore === TOTAL_PINS
+
+
+const handleSpare = (index, rolls) =>
+    zeroToNull(_.get(_.nth(rolls, index), 'score', 0) + _.get(_.nth(rolls, index + 1), 'score', 0))
+
+
+const handleStrike = (index, rolls) =>
+    zeroToNull(_.get(_.nth(rolls, index), 'score', 0) + _.get(_.nth(rolls, index + 1), 'score', 0) + _.get(_.nth(rolls, index + 2), 'score', 0))
+
+
+const getNormalScore = (index, rolls) =>
+    zeroToNull(_.get(_.nth(rolls, index), 'score', 0) + _.get(_.nth(rolls, index + 1), 'score', 0))
+
+
 export const currentScoreSelector = createSelector(
     [framesDataSelector],
-    (data) => {
+    (rolls) => {
         let score = new Array(FRAMES_COUNT)
         score = _.map(score, () => ({
             firstRoll: null,
@@ -34,35 +57,23 @@ export const currentScoreSelector = createSelector(
             totalScore: null
         }))
 
-        if (!_.isEmpty(data)) {
-            _.forEach(data, (item) => {
-                const frame = item.frameId - 1
-                const roll = item.rollId === 1 ? 'firstRoll' : 'secondRoll'
-                score[frame][roll] = item.score
+        if (!_.isEmpty(rolls)) {
+            _.forEach(rolls, (roll, rollIndex) => {
+
+                if (isStrike(_.has(_.nth(rolls, rollIndex), 'score', false))) {
+                    score[rollIndex].isStrike = true
+                    score[rollIndex].totalScore = handleStrike(rollIndex, rolls)
+                    rollIndex += 2
+                } else if (isSpare(rolls[rollIndex].score, rolls[rollIndex + 1].score)) {
+                    score[rollIndex].isSpare = true
+                    score[rollIndex].totalScore = handleSpare(rollIndex, rolls)
+                    rollIndex += 1
+                } else {
+                    score[rollIndex].totalScore = getNormalScore(rollIndex, rolls)
+                    rollIndex += 1
+                }
             })
         }
-
-        _.forEach(score, (frame, index) => {
-            if (_.isNull(frame.firstRoll) && _.isNull(frame.secondRoll)) {
-                score[index].totalScore = index > 0 ? score[index - 1].totalScore : null
-                return
-            }
-            score[index].isStrike = frame.firstRoll === TOTAL_PINS
-            score[index].isSpare = !score[index].isStrike && (frame.firstRoll + frame.secondRoll) === TOTAL_PINS
-            score[index].totalScore = nextRollHasPlayed(score, index) ? score[index].firstRoll + score[index].secondRoll : null
-
-            if (index > 0) {
-                score[index].totalScore += score[index - 1].totalScore
-            }
-
-            if (score[index].isSpare && score[index + 1].firstRoll !== null) {
-                score[index].totalScore += score[index + 1].firstRoll
-            }
-
-            if (score[index].isStrike && score[index + 1].firstRoll !== null && score[index + 1].secondRoll !== null) {
-                score[index].totalScore = score[index].totalScore + score[index + 1].firstRoll + score[index + 1].secondRoll
-            }
-        })
 
         return score
     }
@@ -129,21 +140,6 @@ export const getAvailablePins = createImmutableSelector(
         }
     }
 )
-
-
-const isSpare = (rolls, currentRollIndex) =>
-    _.get(_.nth(rolls, currentRollIndex), 'score', 0) + _.get(_.nth(rolls, currentRollIndex + 1), 'score', 0) === TOTAL_PINS
-
-const handleSpare = (rolls, currentRollIndex) =>
-    _.get(_.nth(rolls, currentRollIndex + 2), 'score', 0)
-
-
-const isStrike = (rolls, currentRollIndex) =>
-    _.get(_.nth(rolls, currentRollIndex), 'score', 0) === TOTAL_PINS
-
-const handleStrike = (rolls, currentRollIndex) =>
-    _.get(_.nth(rolls, currentRollIndex + 1), 'score', 0) + _.get(_.nth(rolls, currentRollIndex + 2), 'score', 0)
-
 
 export const getScore = createImmutableSelector(
     [framesDataSelector],
